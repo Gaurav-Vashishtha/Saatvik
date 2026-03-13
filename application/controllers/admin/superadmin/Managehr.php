@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property upload $upload
  */
 
-class Managehr extends CI_Controller {
+class manageHR extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -45,7 +45,7 @@ class Managehr extends CI_Controller {
 
 
             $this->load->view('admin/layouts/header', $data);
-            $this->load->view('admin/managehr/list', $data);
+            $this->load->view('admin/manageHR/list', $data);
             $this->load->view('admin/layouts/footer');
         }
 
@@ -69,7 +69,7 @@ class Managehr extends CI_Controller {
         ];
 
             $this->load->view('admin/layouts/header', $data);
-            $this->load->view('admin/managehr/add', $data);
+            $this->load->view('admin/manageHR/add', $data);
             $this->load->view('admin/layouts/footer');
             return;
         }
@@ -130,7 +130,7 @@ class Managehr extends CI_Controller {
             ];
 
             $this->load->view('admin/layouts/header', $data);
-            $this->load->view('admin/managehr/edit', $data);
+            $this->load->view('admin/manageHR/edit', $data);
             $this->load->view('admin/layouts/footer');
             return;
         }

@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Managenewsevents_model $Managenewsevents_model
  */
 
-class Managenewsevents extends CI_Controller {
+class manageNewsEvents extends CI_Controller {
 
     public function __construct()
     {
@@ -35,7 +35,7 @@ class Managenewsevents extends CI_Controller {
         $data['news'] = $this->Managenewsevents_model->get_all();
 
         $this->load->view('admin/layouts/header',$data);
-        $this->load->view('admin/managenewsevents/list',$data);
+        $this->load->view('admin/manageNewsEvents/list',$data);
         $this->load->view('admin/layouts/footer');
     }
 
@@ -56,7 +56,7 @@ class Managenewsevents extends CI_Controller {
             ];
 
             $this->load->view('admin/layouts/header',$data);
-            $this->load->view('admin/managenewsevents/add',$data);
+            $this->load->view('admin/manageNewsEvents/add',$data);
             $this->load->view('admin/layouts/footer');
             return;
         }
@@ -107,7 +107,7 @@ class Managenewsevents extends CI_Controller {
             ];
 
             $this->load->view('admin/layouts/header',$data);
-            $this->load->view('admin/managenewsevents/edit',$data);
+            $this->load->view('admin/manageNewsEvents/edit',$data);
             $this->load->view('admin/layouts/footer');
             return;
         }
