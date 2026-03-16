@@ -251,6 +251,20 @@
                     <span>Manage Departmental Information</span>
                 </a>
             </li>
+            <li class="<?= ($this->uri->segment(2) == 'manage-apps') ? 'active' : ''; ?>">
+                <a href="<?= site_url('admin/manage-apps'); ?>">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Manage Apps</span>
+                </a>
+            </li>
+
+            <li class="<?= ($this->uri->segment(2) == 'manage-leadership') ? 'active' : ''; ?>">
+                <a href="<?= site_url('admin/manage-leadership'); ?>">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Manage Leader</span>
+                </a>
+            </li>
+
             <li>
                 <a href="<?php echo site_url('admin/change_password'); ?>">
                     <i class="fas fa-key"></i>

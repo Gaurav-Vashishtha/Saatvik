@@ -123,6 +123,20 @@ $route['admin/manage-leadership-desk/edit/(:num)'] = 'admin/superadmin/Managelea
 $route['admin/manage-leadership-desk/delete/(:num)'] = 'admin/superadmin/Manageleadershipdesk/delete/$1';
 $route['admin/manage-leadership-desk/toggle/(:num)'] = 'admin/superadmin/Manageleadershipdesk/toggle/$1';
 
+$route['admin/manage-apps'] = 'admin/superadmin/Manageapp/index';
+$route['admin/manage-apps/create'] = 'admin/superadmin/Manageapp/create';
+$route['admin/manage-apps/edit/(:num)'] = 'admin/superadmin/Manageapp/edit/$1';
+$route['admin/manage-apps/delete/(:num)'] = 'admin/superadmin/Manageapp/delete/$1';
+$route['admin/manage-apps/toggle/(:num)'] = 'admin/superadmin/Manageapp/toggle/$1';
+
+$route['admin/manage-leadership'] = 'admin/superadmin/Manageleader/index';
+$route['admin/manage-leadership/create'] = 'admin/superadmin/Manageleader/create';
+$route['admin/manage-leadership/edit/(:num)'] = 'admin/superadmin/Manageleader/edit/$1';
+$route['admin/manage-leadership/delete/(:num)'] = 'admin/superadmin/Manageleader/delete/$1';
+$route['admin/manage-leadership/toggle/(:num)'] = 'admin/superadmin/Manageleader/toggle/$1';
+
+
+
 
 
 
