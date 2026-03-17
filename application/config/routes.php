@@ -174,6 +174,8 @@ $route['api/get-learning-material'] = 'admin/superadmin/Apis/ApiController/get_l
 $route['api/get-quiz'] = 'admin/superadmin/Apis/ApiController/get_quiz';
 $route['api/get-ledership-desk'] = 'admin/superadmin/Apis/ApiController/get_ledership_desk';
 $route['api/get-departmental-information'] = 'admin/superadmin/Apis/ApiController/get_departmental_information';
+$route['api/get-apps'] = 'admin/superadmin/Apis/ApiController/get_apps';
+$route['api/get-leader'] = 'admin/superadmin/Apis/ApiController/get_leader';
 
 
 

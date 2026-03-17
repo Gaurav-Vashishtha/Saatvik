@@ -9,7 +9,7 @@
         <form method="post">
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Section *</label>
+                <label class="form-label ">Section *</label>
 
                 <select name="section" class="form-control" required>
                     <option value="">Select Section</option>
@@ -21,7 +21,7 @@
 
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Publish Date *</label>
+                <label class="form-label ">Publish Date *</label>
 
                 <input type="date"
                        name="publish_date"
@@ -31,7 +31,7 @@
 
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Title *</label>
+                <label class="form-label ">Title *</label>
 
                 <input type="text"
                        name="title"
@@ -42,7 +42,7 @@
 
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Description</label>
+                <label class="form-label ">Description</label>
 
                 <textarea name="description"
                           id="description"
@@ -51,7 +51,7 @@
             </div>
             
              <div class="mb-3">
-                <label class="form-label fw-semibold">Document Link (Optional)</label>
+                <label class="form-label ">Document Link (Optional)</label>
                 <input type="url" 
                        name="document_link" 
                        class="form-control"
@@ -60,7 +60,7 @@
 
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Status</label>
+                <label class="form-label ">Status</label>
 
                 <select name="status" class="form-control">
                     <option value="1">Active</option>

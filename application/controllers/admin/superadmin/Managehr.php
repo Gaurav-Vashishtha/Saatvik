@@ -57,6 +57,9 @@ class manageHR extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
         $this->form_validation->set_rules('phone', 'Phone', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+        $this->form_validation->set_rules('role_id', 'Role', 'required');
+
+         
 
         if ($this->form_validation->run() === FALSE) {
 
@@ -68,6 +71,8 @@ class manageHR extends CI_Controller {
             ['name' => 'Add Admin User']
         ];
 
+             $data['roles'] = $this->Managehr_model->get_roles();
+
             $this->load->view('admin/layouts/header', $data);
             $this->load->view('admin/manageHR/add', $data);
             $this->load->view('admin/layouts/footer');
@@ -76,7 +81,7 @@ class manageHR extends CI_Controller {
 
         $post = $this->input->post(NULL, TRUE);
         $uploaded_image = _upload_file('image', './uploads/hr/');
-        $employee_code = generate_employee_code('users', 'HR');
+        $employee_code = generate_employee_code('users', 'ADMU');
         
         $payload = [
             'employee_code'     => $employee_code,
@@ -85,7 +90,7 @@ class manageHR extends CI_Controller {
             'email'             => $post['email'],
             'phone'             => $post['phone'],
             'password'          => password_hash($post['password'], PASSWORD_DEFAULT),
-            'role_id'           => 2, 
+            'role_id'           => $post['role_id'],
             'gender'            => $post['gender'] ?? NULL,
             'date_of_birth'     => !empty($post['date_of_birth']) ? $post['date_of_birth'] : NULL,
             'marital_status'    => $post['marital_status'] ?? NULL,
@@ -118,6 +123,8 @@ class manageHR extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('phone', 'Phone', 'required');
 
+
+
         if ($this->form_validation->run() === FALSE) {
 
             $data['title'] = 'Edit Admin User';
@@ -128,6 +135,7 @@ class manageHR extends CI_Controller {
                 ['name' => 'Manage Admin User', 'url' => site_url('admin/manage-hr')],
                 ['name' => 'Edit Admin User']
             ];
+
 
             $this->load->view('admin/layouts/header', $data);
             $this->load->view('admin/manageHR/edit', $data);

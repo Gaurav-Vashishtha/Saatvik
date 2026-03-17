@@ -12,7 +12,7 @@
             <div class="row">
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">First Name *</label>
+                    <label class="form-label ">First Name *</label>
                     <input type="text"
                            name="first_name"
                            class="form-control"
@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Last Name</label>
+                    <label class="form-label ">Last Name</label>
                     <input type="text"
                            name="last_name"
                            class="form-control"
@@ -39,7 +39,7 @@
 
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Gender</label>
+                    <label class="form-label ">Gender</label>
                     <select name="gender" class="form-select">
                         <option value="">Select Gender</option>
                         <option value="Male" <?php echo ($employee->gender=='Male')?'selected':''; ?>>Male</option>
@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Date of Birth</label>
+                    <label class="form-label ">Date of Birth</label>
                     <input type="date"
                            name="date_of_birth"
                            class="form-control"
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Marital Status</label>
+                    <label class="form-label ">Marital Status</label>
                     <select name="marital_status" id="marital_status" class="form-select">
                         <option value="">Select Status</option>
                         <option value="Single" <?php echo ($employee->marital_status=='Single')?'selected':''; ?>>Single</option>
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="col-md-6 mb-3" id="anniversary_section">
-                    <label class="form-label fw-semibold">Anniversary Date</label>
+                    <label class="form-label ">Anniversary Date</label>
                     <input type="date"
                            name="anniversary_date"
                            class="form-control"
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Email *</label>
+                    <label class="form-label ">Email *</label>
                     <input type="email"
                            name="email"
                            class="form-control"
@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Phone *</label>
+                    <label class="form-label ">Phone *</label>
                     <input type="text"
                            name="phone"
                            maxlength="10"
@@ -94,7 +94,7 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Designation</label>
+                    <label class="form-label ">Designation</label>
                     <input type="text"
                            name="designation"
                            class="form-control"
@@ -102,7 +102,7 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Department</label>
+                    <label class="form-label ">Department</label>
                     <input type="text"
                            name="department"
                            class="form-control"
@@ -110,12 +110,12 @@
                 </div>
 
                 <div class="col-md-12 mb-3">
-                    <label class="form-label fw-semibold">Address</label>
+                    <label class="form-label ">Address</label>
                     <textarea name="address" class="form-control"><?php echo set_value('address', $employee->address); ?></textarea>
                 </div>
 
                 <!-- <div class="col-md-4 mb-3">
-                    <label class="form-label fw-semibold">City</label>
+                    <label class="form-label ">City</label>
                     <input type="text"
                            name="city"
                            class="form-control"
@@ -123,7 +123,7 @@
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <label class="form-label fw-semibold">State</label>
+                    <label class="form-label ">State</label>
                     <input type="text"
                            name="state"
                            class="form-control"
@@ -131,7 +131,7 @@
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <label class="form-label fw-semibold">Pincode</label>
+                    <label class="form-label ">Pincode</label>
                     <input type="text"
                            name="pincode"
                            class="form-control"
@@ -139,7 +139,7 @@
                 </div> -->
 
                 <div class="col-md-6 mb-3">
-                    <label class='form-label fw-semibold'>Image <small>(Max size: 2MB | 200x200 | JPG/PNG/JPEG/WEBP)</small></label>
+                    <label class='form-label '>Image <small>(Max size: 2MB | 200x200 | JPG/PNG/JPEG/WEBP)</small></label>
                     <input type="file" name="employee_image" class="form-control">
                     <?php if ($employee->employee_image): ?>
                         <img src="<?= base_url('uploads/employee/'.$employee->employee_image); ?>" width="120" class="mt-2">
@@ -147,7 +147,7 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Status</label>
+                    <label class="form-label ">Status</label>
                     <select name="is_active" class="form-select">
                         <option value="1" <?php echo ($employee->is_active == 1) ? 'selected' : ''; ?>>Active</option>
                         <option value="0" <?php echo ($employee->is_active == 0) ? 'selected' : ''; ?>>Inactive</option>

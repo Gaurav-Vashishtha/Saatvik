@@ -41,4 +41,11 @@ class Manageleader_model extends CI_Model {
             ->update($this->table,['status'=>$status]);
     }
 
+         public function get_all_active() {
+        return $this->db->where('status', 1)
+                        ->order_by('id', 'DESC')
+                        ->get($this->table)
+                        ->result_array();
+    }
+
 }

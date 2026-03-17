@@ -3,7 +3,7 @@
     <div class="card shadow-sm border">
 
         <div class="card-header">
-            <h5 class="mb-0 fw-bold">Add Leadership</h5>
+            <h5 class="mb-0 ">Add Leadership</h5>
         </div>
 
         <div class="card-body">
@@ -15,28 +15,28 @@
                 <div class="row g-3">
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Name *</label>
+                        <label class="form-label ">Name *</label>
                         <input type="text" name="name" class="form-control" required>
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Designation *</label>
+                        <label class="form-label ">Designation *</label>
                         <input type="text" name="designation" class="form-control" required>
                     </div>
                     
                    <div class="col-md-12">
-                        <label class="form-label fw-semibold">Description</label>
+                        <label class="form-label ">Description</label>
                         <input type="text" name="description" id="description" class="form-control">
                     </div>
                     <div class="col-md-12">
-                        <label class="form-label fw-semibold">Image</label>
+                        <label class="form-label ">Image</label>
                         <input type="file" name="image" class="form-control">
                     </div>
                     
 
 
                     <div class="col-md-12">
-                        <label class="form-label fw-semibold">Status</label>
+                        <label class="form-label ">Status</label>
 
                         <select name="status" class="form-select">
                             <option value="1">Active</option>

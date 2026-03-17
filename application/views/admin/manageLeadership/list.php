@@ -3,7 +3,7 @@
 <div class="card shadow-sm border">
 
     <div class="card-header  d-flex justify-content-between align-items-center">
-        <h5 class="mb-0 fw-bold">Manage Leadership</h5>
+        <h5 class="mb-0 ">Manage Leadership</h5>
 
         <a href="<?php echo base_url('admin/manage-leadership/create'); ?>" 
         class="btn btn-primary btn-sm">
@@ -32,7 +32,7 @@
                             <tr>
                                 <td><?php echo $i++; ?></td>
 
-                                <td class="fw-semibold">
+                                <td class="">
                                     <?php echo $leader->name; ?>
                                 </td>
 

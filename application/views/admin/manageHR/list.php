@@ -3,11 +3,11 @@
     <div class="card shadow-sm border">
 
         <div class="card-header  d-flex justify-content-between align-items-center">
-            <h5 class="mb-0 fw-bold">Manage Admin User</h5>
+            <h5 class="mb-0 ">Manage Admin User</h5>
 
             <a href="<?php echo base_url('admin/manage-hr/create'); ?>" 
             class="btn btn-primary btn-sm">
-                <i class="fa fa-plus"></i> Add HR
+                <i class="fa fa-plus"></i> Add 
             </a>
         </div>
 
@@ -33,7 +33,7 @@
                                 <tr>
                                     <td><?php echo $i++; ?></td>
 
-                                    <td class="fw-semibold">
+                                    <td class="">
                                         <?php echo $hr->first_name . ' ' . $hr->last_name; ?>
                                     </td>
                                     <td><?php echo $hr->employee_code; ?></td>
@@ -65,7 +65,7 @@
 
                                         <a href="<?php echo base_url('admin/manage-hr/delete/'.$hr->id); ?>" 
                                            class="btn btn-sm btn-danger"
-                                           onclick="return confirm('Are you sure you want to delete this HR?');">
+                                           onclick="return confirm('Are you sure you want to delete this User?');">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </td>
@@ -74,7 +74,7 @@
                         <?php else: ?>
                             <tr>
                                 <td colspan="6" class="text-center py-4 text-muted">
-                                    No HR Found
+                                    No User Found
                                 </td>
                             </tr>
                         <?php endif; ?>

@@ -4,7 +4,7 @@
     <div class="card shadow-sm border">
 
         <div class="card-header">
-            <h5 class="mb-0 fw-bold">Edit App</h5>
+            <h5 class="mb-0 ">Edit App</h5>
         </div>
 
         <div class="card-body">
@@ -16,7 +16,7 @@
                 <div class="row g-3">
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Title *</label>
+                        <label class="form-label ">Title *</label>
                         <input type="text"
                                name="title"
                                class="form-control"
@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">App Name *</label>
+                        <label class="form-label ">App Name *</label>
                         <input type="text"
                                name="app_name"
                                class="form-control"
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">
+                        <label class="form-label ">
                             Image <small>(Max size: 2MB | JPG/PNG/JPEG/WEBP)</small>
                         </label>
 
@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Status</label>
+                        <label class="form-label ">Status</label>
 
                         <select name="status" class="form-select">
                             <option value="1" <?= ($app->status == 1) ? 'selected' : '' ?>>

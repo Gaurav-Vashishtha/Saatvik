@@ -11,7 +11,7 @@ class Admin_model extends CI_Model {
     {
         return $this->db
                     ->where('email', $email)
-                    // ->where('role_id', 1)
+                    ->where('is_active', 1)
                     // ->limit(1)
                     ->get('users')
                     ->row();

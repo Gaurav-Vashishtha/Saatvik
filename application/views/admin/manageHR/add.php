@@ -3,7 +3,7 @@
     <div class="card shadow-sm border">
 
         <div class="card-header ">
-            <h5 class="mb-0 fw-bold">Add HR</h5>
+            <h5 class="mb-0 ">Add Admin User</h5>
         </div>
 
         <div class="card-body">
@@ -15,7 +15,7 @@
                 <div class="row g-3">
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">First Name *</label>
+                        <label class="form-label ">First Name *</label>
                         <input type="text"
                                name="first_name"
                                class="form-control"
@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Last Name *</label>
+                        <label class="form-label ">Last Name *</label>
                         <input type="text"
                                name="last_name"
                                class="form-control"
@@ -35,7 +35,23 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Email *</label>
+                        <label class="form-label ">Role *</label>
+                        <select name="role_id" class="form-select" required>
+                            <option value="">Select Role</option>
+                            <?php if (!empty($roles)): ?>
+                                <?php foreach ($roles as $role): ?>
+                                    <option value="<?php echo $role->id; ?>" 
+                                        <?php echo set_select('role_id', $role->id); ?>>
+                                        <?php echo $role->name; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
+                    </div>
+                    
+
+                    <div class="col-md-6">
+                        <label class="form-label ">Email *</label>
                         <input type="email"
                                name="email"
                                class="form-control"
@@ -45,7 +61,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Phone No. *</label>
+                        <label class="form-label ">Phone No. *</label>
                         <input type="text"
                                name="phone"
                                class="form-control"
@@ -57,7 +73,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label fw-semibold">Password *</label>
+                        <label class="form-label ">Password *</label>
                         <input type="password"
                                name="password"
                                class="form-control"
@@ -66,7 +82,7 @@
                     </div>
                     
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Gender</label>
+                    <label class="form-label ">Gender</label>
                     <select name="gender" class="form-select">
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
@@ -76,7 +92,7 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Marital Status</label>
+                    <label class="form-label ">Marital Status</label>
                     <select name="marital_status" class="form-select">
                         <option value="">Select Status</option>
                         <option value="Single">Single</option>
@@ -85,31 +101,31 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Anniversary Date</label>
+                    <label class="form-label ">Anniversary Date</label>
                     <input type="date" name="anniversary_date" class="form-control">
                 </div>
                  <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Department</label>
+                    <label class="form-label ">Department</label>
                     <input type="text" name="department" class="form-control">
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Date of Birth</label>
+                    <label class="form-label ">Date of Birth</label>
                     <input type="date" name="date_of_birth" class="form-control">
                 </div>
-
-                <div class="col-md-12 mb-3">
-                    <label class="form-label fw-semibold">Address</label>
-                    <textarea name="address" class="form-control"></textarea>
-                </div>
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">
+                    <label class="form-label ">
                         Image <small>(Max size: 2MB | 200×200 | JPG/PNG/JPEG/WEBP)</small>
                     </label>
                     <input type="file" name="image" class="form-control">
                 </div>
 
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Status</label>
+                <div class="col-md-12 mb-3">
+                    <label class="form-label ">Address</label>
+                    <textarea name="address" class="form-control"></textarea>
+                </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label ">Status</label>
                         <select name="status" class="form-select">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
@@ -127,7 +143,7 @@
                     </a>
 
                     <button type="submit" class="btn btn-success">
-                        Save HR
+                        Save 
                     </button>
                 </div>
 

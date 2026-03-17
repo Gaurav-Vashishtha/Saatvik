@@ -14,6 +14,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property Quiz_model $Quiz_model
  * @property Managedepartmentalinfo_model $Managedepartmentalinfo_model
  * @property Manageleadershipdesk_model $Manageleadershipdesk_model
+ * @property Manageapp_model $Manageapp_model
+ * @property Manageleader_model $Manageleader_model
  * @property db $db
  */
 
@@ -22,6 +24,8 @@ class ApiController extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('admin/Manageleader_model');
+        $this->load->model('admin/Manageapp_model');
         $this->load->model('admin/Quiz_model');
         $this->load->model('admin/Managedepartmentalinfo_model');
         $this->load->model('admin/Manageleadershipdesk_model');
@@ -324,4 +328,83 @@ public function get_departmental_information()
             ->set_output(json_encode($response));
     }
 }
+
+// departmental information
+    public function get_apps()
+    {
+        try {
+
+            $apps = $this->Manageapp_model->get_all_active();
+            foreach($apps as &$app){
+                if(!empty($app['image'])){
+                    $app['image_url'] = base_url($app['image']);
+                }
+                else{
+                 $app['image_url'] = NULL;
+                }
+            }
+
+
+            $response = [
+                'status' => true,
+                'message' => 'List for this items',
+                'data' => $apps
+            ];
+
+            return $this->output
+                ->set_status_header(200)
+                ->set_output(json_encode($response));
+
+        } catch (Exception $e) {
+
+            $response = [
+                'status' => false,
+                'message' => $e->getMessage()
+            ];
+
+            return $this->output
+                ->set_status_header(500)
+                ->set_output(json_encode($response));
+        }
+    }
+
+
+//leader information
+    public function get_leader()
+    {
+        try {
+
+            $leaders = $this->Manageleader_model->get_all_active();
+
+                foreach ($leaders as &$leader) {
+                    if (!empty($leader['image'])) {
+                        $leader['image_url'] = base_url($leader['image']);
+                    } else {
+                        $leader['image_url'] = null;
+                    }
+                }
+
+            $response = [
+                'status' => true,
+                'message' => 'List for this items',
+                'data' => $leaders
+            ];
+
+            return $this->output
+                ->set_status_header(200)
+                ->set_output(json_encode($response));
+
+        } catch (Exception $e) {
+
+            $response = [
+                'status' => false,
+                'message' => $e->getMessage()
+            ];
+
+            return $this->output
+                ->set_status_header(500)
+                ->set_output(json_encode($response));
+        }
+    }
+
 }

@@ -3,7 +3,7 @@
     <div class="card shadow-sm border">
 
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0 fw-bold">Manage Quiz Questions</h5>
+            <h5 class="mb-0 ">Manage Quiz Questions</h5>
 
             <a href="<?= base_url('admin/manage-quiz/create'); ?>" 
                class="btn btn-primary btn-sm">
@@ -31,7 +31,7 @@
                                 <tr>
                                     <td><?= $i++; ?></td>
 
-                                <td class="fw-semibold">
+                                <td class="">
                                     <?= word_limiter($q->question, 15); ?>
                                 </td>
 

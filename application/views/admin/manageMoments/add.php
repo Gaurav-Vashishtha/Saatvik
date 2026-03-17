@@ -15,7 +15,7 @@
         <form method="post" enctype="multipart/form-data">
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Title *</label>
+                <label class="form-label ">Title *</label>
                 <input type="text"
                        name="title"
                        class="form-control"
@@ -24,7 +24,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Description</label>
+                <label class="form-label ">Description</label>
                 <textarea name="description"
                           id="description"
                           class="form-control"
@@ -32,14 +32,14 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Image<small>(Max size: 2MB | 600×400 | JPG/PNG/JPEG/WEBP)</small></label>
+                <label class="form-label ">Image<small>(Max size: 2MB | 600×400 | JPG/PNG/JPEG/WEBP)</small></label>
                 <input type="file"
                        name="image"
                        class="form-control">
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Status</label>
+                <label class="form-label ">Status</label>
                 <select name="status" class="form-select">
                     <option value="1">Active</option>
                     <option value="0">Inactive</option>

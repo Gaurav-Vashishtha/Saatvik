@@ -8,7 +8,7 @@
         <form method="post">
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Policy Title *</label>
+                <label class="form-label ">Policy Title *</label>
                 <input type="text" 
                        name="title" 
                        class="form-control" 
@@ -17,7 +17,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Short Description</label>
+                <label class="form-label ">Short Description</label>
                 <textarea name="short_description" 
                           class="form-control" 
                           id= "short_description"
@@ -26,7 +26,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Full Description</label>
+                <label class="form-label ">Full Description</label>
                 <textarea name="description" 
                           class="form-control"
                           id= "full_description" 
@@ -35,14 +35,14 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Document Link (Optional)</label>
+                <label class="form-label ">Document Link (Optional)</label>
                 <input type="url" 
                        name="document_link" 
                        class="form-control"
                        placeholder="https://example.com/policy.pdf">
             </div>
             <div class="mb-3">
-                <label class="form-label fw-semibold">Status</label>
+                <label class="form-label ">Status</label>
                 <select name="is_active" class="form-select">
                     <option value="1" <?php echo set_value('is_active') == '1' ? 'selected' : ''; ?>>
                         Active

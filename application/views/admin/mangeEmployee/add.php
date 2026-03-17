@@ -12,17 +12,17 @@
             <div class="row">
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">First Name *</label>
+                    <label class="form-label ">First Name *</label>
                     <input type="text" name="first_name" class="form-control" required>
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Last Name</label>
+                    <label class="form-label ">Last Name</label>
                     <input type="text" name="last_name" class="form-control">
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Gender</label>
+                    <label class="form-label ">Gender</label>
                     <select name="gender" class="form-select">
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
@@ -32,12 +32,12 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Date of Birth</label>
+                    <label class="form-label ">Date of Birth</label>
                     <input type="date" name="date_of_birth" class="form-control">
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Marital Status</label>
+                    <label class="form-label ">Marital Status</label>
                     <select name="marital_status" class="form-select">
                         <option value="">Select Status</option>
                         <option value="Single">Single</option>
@@ -46,59 +46,59 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Anniversary Date</label>
+                    <label class="form-label ">Anniversary Date</label>
                     <input type="date" name="anniversary_date" class="form-control">
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Email *</label>
+                    <label class="form-label ">Email *</label>
                     <input type="email" name="email" class="form-control" required>
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Phone *</label>
+                    <label class="form-label ">Phone *</label>
                     <input type="text" name="phone" maxlength="10" pattern="[0-9]{10}" class="form-control" required>
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Designation</label>
+                    <label class="form-label ">Designation</label>
                     <input type="text" name="designation" class="form-control">
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Department</label>
+                    <label class="form-label ">Department</label>
                     <input type="text" name="department" class="form-control">
                 </div>
 
                 <div class="col-md-12 mb-3">
-                    <label class="form-label fw-semibold">Address</label>
+                    <label class="form-label ">Address</label>
                     <textarea name="address" class="form-control"></textarea>
                 </div>
 
                 <!-- <div class="col-md-4 mb-3">
-                    <label class="form-label fw-semibold">City</label>
+                    <label class="form-label ">City</label>
                     <input type="text" name="city" class="form-control">
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <label class="form-label fw-semibold">State</label>
+                    <label class="form-label ">State</label>
                     <input type="text" name="state" class="form-control">
                 </div>
 
                 <div class="col-md-4 mb-3">
-                    <label class="form-label fw-semibold">Pincode</label>
+                    <label class="form-label ">Pincode</label>
                     <input type="text" name="pincode" class="form-control">
                 </div> -->
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">
+                    <label class="form-label ">
                         Image <small>(Max size: 2MB | 200×200 | JPG/PNG/JPEG/WEBP)</small>
                     </label>
                     <input type="file" name="employee_image" class="form-control">
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-semibold">Status</label>
+                    <label class="form-label ">Status</label>
                     <select name="is_active" class="form-select">
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>

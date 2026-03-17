@@ -292,18 +292,20 @@
             </button>
 
             <div>
-                <?php 
-                    $role_id = $this->session->userdata('role_id');
+    <?php 
+        $role_id = $this->session->userdata('role_id');
 
-                    $roles = [
-                        1 => 'Superadmin',
-                        2 => 'HR',
-                    ];
+        if ($role_id == 1) {
+            $welcome_text = 'Superadmin';
+        } else {
+            $ci =& get_instance();
+            $ci->load->database();
 
-                    $welcome_text = $roles[$role_id] ?? ($this->session->userdata('admin_name') ?? 'Admin');
-                ?>
-
-                Welcome, <strong><?php echo $welcome_text; ?></strong>
+            $role = $ci->db->select('name')->from('roles')->where('id', $role_id)->get()->row();
+            $welcome_text = $role->name ?? ($ci->session->userdata('admin_name') ?? 'Admin');
+        }
+        ?>
+        Welcome, <strong><?php echo $welcome_text; ?></strong>
             </div>
         </div>
 

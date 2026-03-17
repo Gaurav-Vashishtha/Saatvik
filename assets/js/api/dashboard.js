@@ -385,6 +385,30 @@ function loadDepartmentInformation() {
 
 }
 
+//my apps 
+function loadMoments() {
+    fetch(BASE_URL + "/satvik/api/get-leader")
+        .then(res => res.json())
+        .then(data => {
+
+            let wrapper = document.getElementById("my-apps");
+            let html = "";
+
+            if (data.data) {
+                data.data.forEach(moment => {
+                    html += `
+                <div class="swiper-slide">
+                    <img src="${moment.image_url ?? 'https://placehold.co/600x400'}" class="rounded-3 mb-2">
+                     <h6 class="mb-0 fw-semibold">${moment.name ?? ''}</h6>
+                     <h6 class="mb-0 fw-semibold">${moment.title ?? ''}</h6>
+                </div>`;
+                });
+            }
+
+            wrapper.innerHTML = html;
+        });
+}
+
 document.addEventListener("click", function(e){
 
     if(e.target.classList.contains("read-btn")){

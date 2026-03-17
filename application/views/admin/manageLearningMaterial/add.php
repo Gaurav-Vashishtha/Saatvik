@@ -8,7 +8,7 @@
         <form method="post">
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Question</label>
+                <label class="form-label ">Question</label>
                 <input type="text" 
                        name="question" 
                        class="form-control" 
@@ -17,7 +17,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Answer</label>
+                <label class="form-label ">Answer</label>
                 <textarea name="answer" 
                           class="form-control" 
                           id= "answer"
@@ -26,7 +26,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Status</label>
+                <label class="form-label ">Status</label>
                 <select name="is_active" class="form-select">
 
                     <option value="1" <?php echo set_value('is_active','1') == '1' ? 'selected' : ''; ?>>

@@ -8,7 +8,7 @@
         <form method="post" enctype="multipart/form-data">
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Title *</label>
+                <label class="form-label ">Title *</label>
                 <input type="text"
                        name="title"
                        value="<?= $news->title ?>"
@@ -17,7 +17,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Date</label>
+                <label class="form-label ">Date</label>
                 <input type="date"
                        name="event_date"
                        value="<?= $news->event_date ?>"
@@ -25,7 +25,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Description</label>
+                <label class="form-label ">Description</label>
                 <textarea name="description"
                           id="description"
                           class="form-control"
@@ -33,7 +33,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Image<small>(Max size: 2MB | 600×400 | JPG/PNG/JPEG/WEBP)</small></label>
+                <label class="form-label ">Image<small>(Max size: 2MB | 600×400 | JPG/PNG/JPEG/WEBP)</small></label>
 
                 <?php if(!empty($news->image)): ?>
                     <div class="mb-2">
@@ -48,7 +48,7 @@
 
 
             <div class="mb-3">
-                <label class="form-label fw-semibold">Status</label>
+                <label class="form-label ">Status</label>
                 <select name="is_active" class="form-select">
                     <option value="1" <?php echo ($news->is_active == 1) ? 'selected' : ''; ?>>
                         Active

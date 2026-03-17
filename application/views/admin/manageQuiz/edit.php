@@ -11,37 +11,37 @@
     <form method="post">
 
         <div class="mb-3">
-            <label class="form-label fw-semibold">Question</label>
+            <label class="form-label ">Question</label>
             <textarea name="question" class="form-control" rows="3"><?= set_value('question', $question->question); ?></textarea>
             <?= form_error('question', '<small class="text-danger">', '</small>'); ?>
         </div>
 
         <div class="mb-2">
-            <label class="form-label fw-semibold">Option A</label>
+            <label class="form-label ">Option A</label>
             <input type="text" name="option_a" class="form-control"
                    value="<?= set_value('option_a', $question->option_a); ?>">
         </div>
 
         <div class="mb-2">
-            <label class="form-label fw-semibold">Option B</label>
+            <label class="form-label ">Option B</label>
             <input type="text" name="option_b" class="form-control"
                    value="<?= set_value('option_b', $question->option_b); ?>">
         </div>
 
         <div class="mb-2">
-            <label class="form-label fw-semibold">Option C</label>
+            <label class="form-label ">Option C</label>
             <input type="text" name="option_c" class="form-control"
                    value="<?= set_value('option_c', $question->option_c); ?>">
         </div>
 
         <div class="mb-3">
-            <label class="form-label fw-semibold">Option D</label>
+            <label class="form-label ">Option D</label>
             <input type="text" name="option_d" class="form-control"
                    value="<?= set_value('option_d', $question->option_d); ?>">
         </div>
 
         <div class="mb-3">
-            <label class="form-label fw-semibold">Correct Option</label>
+            <label class="form-label ">Correct Option</label>
             <select name="correct_option" class="form-control">
                 <option value="A" <?= set_select('correct_option', 'A', $question->correct_option == 'A'); ?>>A</option>
                 <option value="B" <?= set_select('correct_option', 'B', $question->correct_option == 'B'); ?>>B</option>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label fw-semibold">Status</label>
+            <label class="form-label ">Status</label>
             <div>
                 <input type="checkbox" name="status" value="1"
                     <?= set_checkbox('status', '1', $question->is_active == 1); ?>>
