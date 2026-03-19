@@ -69,6 +69,7 @@ class Managemoments extends CI_Controller {
 
             'title' => $post['title'],
             'description' => $post['description'],
+            'date'     => !empty($post['date']) ? $post['date'] : NULL,
             'image' => $uploaded_image,
             'is_active' => $post['status'],
             'created_at' => date('Y-m-d H:i:s')
@@ -118,6 +119,7 @@ class Managemoments extends CI_Controller {
 
             'title' => $post['title'],
             'description' => $post['description'],
+            'date'     => !empty($post['date']) ? $post['date'] : NULL,
             'image' => $uploaded_image ?? $moment->image,
             'is_active' => $post['status'],
             'updated_at' => date('Y-m-d H:i:s')

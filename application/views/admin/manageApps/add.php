@@ -32,6 +32,14 @@
                            value="<?php echo set_value('app_name'); ?>"
                            required>
                 </div>
+                
+                <div class="mb-3">
+                    <label class="form-label ">Document Link (Optional)</label>
+                    <input type="url" 
+                        name="document_link" 
+                        class="form-control"
+                        placeholder="https://example.com/policy.pdf">
+                </div>
 
                 <div class="col-md-6">
                     <label class="form-label ">

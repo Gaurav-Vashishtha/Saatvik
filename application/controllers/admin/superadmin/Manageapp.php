@@ -71,6 +71,7 @@ class Manageapp extends CI_Controller {
 
             'title'=>$post['title'],
             'app_name'=>$post['app_name'],
+            'document_link'=>$post['document_link'],
             'image'=>$image,
             'status' => (int) $post['status'],
             'created_at'=>date('Y-m-d H:i:s')
@@ -122,6 +123,7 @@ class Manageapp extends CI_Controller {
 
             'title'=>$post['title'],
             'app_name'=>$post['app_name'],
+            'document_link'=>$post['document_link'],
             'image'=>$image ?? $app->image,
             'status' => (int) $post['status'],
             'updated_at'=>date('Y-m-d H:i:s')

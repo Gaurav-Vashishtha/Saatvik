@@ -85,6 +85,7 @@ $route['admin/employee/create'] = 'admin/superadmin/Manageemployee/create';
 $route['admin/employee/edit/(:num)'] = 'admin/superadmin/Manageemployee/edit/$1';
 $route['admin/employee/delete/(:num)'] = 'admin/superadmin/Manageemployee/delete/$1';
 $route['admin/employee/toggle/(:num)'] = 'admin/superadmin/Manageemployee/toggle/$1';
+$route['admin/employee/export_csv'] = 'admin/superadmin/Manageemployee/export_csv';
 
 $route['admin/manage-quiz'] = 'admin/superadmin/Managequiz/index';
 $route['admin/manage-quiz/create'] = 'admin/superadmin/Managequiz/create';

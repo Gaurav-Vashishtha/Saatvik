@@ -4,9 +4,17 @@
         <a href="<?php echo base_url('admin/employee/create'); ?>" class="btn btn-primary btn-sm">
             <i class="fa fa-plus"></i> Add Employee
         </a>
+
+
     </div>
 
+
+
     <div class="card-body">
+        <a href="<?php echo base_url('admin/employee/export_csv'); ?>" 
+            class="btn btn-success btn-sm">
+            <i class="fa fa-download"></i> Download CSV
+        </a>
         <div class="table-responsive ">
             <table class="table table-hover align-middle datatable">
                 <thead class="bg-light">

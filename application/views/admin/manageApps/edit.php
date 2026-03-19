@@ -33,6 +33,14 @@
                                required>
                     </div>
 
+                    <div class="mb-3">
+                        <label class="form-label ">Document Link (Optional)</label>
+                        <input type="url" 
+                            name="document_link" 
+                            class="form-control"
+                            placeholder="https://example.com/policy.pdf"
+                            value="<?php echo $app->document_link; ?>">
+                    </div>
                     <div class="col-md-6">
                         <label class="form-label ">
                             Image <small>(Max size: 2MB | JPG/PNG/JPEG/WEBP)</small>

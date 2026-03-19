@@ -187,7 +187,62 @@ class Manageemployee extends CI_Controller {
         redirect('admin/employee');
     }
 
+    public function export_csv()
+    {
+        $employees = $this->Manageemployee_model->get_all();
 
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="employees_' . date('Y-m-d') . '.csv";');
+
+        $output = fopen("php://output", "w");
+
+        fputcsv($output, [
+            'ID',
+            'Employee Code',
+            'First Name',
+            'Last Name',
+            'Gender',
+            'Date of Birth',
+            'Anniversary Date',
+            'Marital Status',
+            'Email',
+            'Phone',
+            'Designation',
+            'Department',
+            'Address',
+            'Employee Image',
+            'Status',
+            'Created At',
+            'Updated At'
+        ]);
+
+        if (!empty($employees)) {
+            foreach ($employees as $emp) {
+                fputcsv($output, [
+                    $emp->id,
+                    $emp->employee_code,
+                    $emp->first_name,
+                    $emp->last_name,
+                    $emp->gender,
+                    $emp->date_of_birth,
+                    $emp->anniversary_date,
+                    $emp->marital_status,
+                    $emp->email,
+                    $emp->phone,
+                    $emp->designation,
+                    $emp->department,
+                    $emp->address,
+                    $emp->employee_image,
+                    $emp->is_active ? 'Active' : 'Inactive',
+                    $emp->created_at,
+                    $emp->updated_at
+                ]);
+            }
+        }
+
+        fclose($output);
+        exit;
+    }
 
 
 }

@@ -13,8 +13,8 @@
         <?php endif; ?>
 
         <form method="post" enctype="multipart/form-data">
-
-            <div class="mb-3">
+          <div class="row">
+            <div class="col-md-6 mb-3">
                 <label class="form-label ">Title *</label>
                 <input type="text"
                        name="title"
@@ -23,6 +23,11 @@
                        required>
             </div>
 
+             <div class="col-md-6 mb-3">
+                    <label class="form-label ">Date</label>
+                    <input type="date" name="date" class="form-control">
+                </div>
+             </div>
             <div class="mb-3">
                 <label class="form-label ">Description</label>
                 <textarea name="description"
