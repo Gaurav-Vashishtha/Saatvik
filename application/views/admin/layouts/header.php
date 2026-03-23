@@ -193,6 +193,13 @@
 
         <ul class="nav">
 
+        <li class="<?= ($this->uri->uri_string() == 'admin/dashboard') ? 'active' : '' ?>">
+            <a href="<?= site_url('admin/dashboard'); ?>">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
             <?php foreach ($sidebars as $menu): ?>
 
                 <?php if (hasSidebarAccess($menu->url_slug)): ?>

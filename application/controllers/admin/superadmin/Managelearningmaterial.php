@@ -3,7 +3,7 @@
 // use PSpell\Config;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+require_once(APPPATH.'core/MY_Admin_Controller.php');
 /**
  * @property CI_Input $input
  * @property CI_Session $session
@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property upload $upload
  */
 
-class Managelearningmaterial extends CI_Controller {
+class Managelearningmaterial extends MY_Admin_Controller {
 
     public function __construct() {
         parent::__construct();

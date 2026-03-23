@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+require_once(APPPATH.'core/MY_Admin_Controller.php');
 /**
  * @property CI_Input $input
  * @property CI_Session $session
@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property upload $upload
  */
 
-class Manageleadershipdesk extends CI_Controller {
+class Manageleadershipdesk extends MY_Admin_Controller {
 
     public function __construct()
     {

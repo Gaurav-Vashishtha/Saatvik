@@ -13,9 +13,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $hook['post_controller_constructor'][] = array(
+    'class'    => 'AuthMiddleware',
+    'function' => 'check',
+    'filename' => 'AuthMiddleware.php',
+    'filepath' => 'hooks'
+);
+
+$hook['post_controller_constructor'][] = array(
     'class'    => 'PermissionMiddleware',
     'function' => 'check',
     'filename' => 'PermissionMiddleware.php',
-    'filepath' => 'hooks',
-    'params'   => array()
+    'filepath' => 'hooks'
 );

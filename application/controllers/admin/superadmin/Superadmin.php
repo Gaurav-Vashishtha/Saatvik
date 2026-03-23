@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once(APPPATH.'core/MY_Admin_Controller.php');
 
 /**
  * @property CI_Input $input
@@ -9,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property db $db
  */
 
-class SuperAdmin extends CI_Controller {
+class SuperAdmin extends MY_Admin_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -48,7 +49,6 @@ class SuperAdmin extends CI_Controller {
             $this->session->set_userdata([
                 'admin_id'        => $users->id,
                 'admin_email'     => $users->email,
-                'admin_name'      => $users->name,
                 'admin_logged_in' => TRUE,
                 'role_id'         => $users->role_id
             ]);

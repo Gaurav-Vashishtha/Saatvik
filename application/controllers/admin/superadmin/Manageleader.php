@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+require_once(APPPATH.'core/MY_Admin_Controller.php');
 /**
  * @property CI_Input $input
  * @property CI_Session $session
@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Manageleader_model $Manageleader_model
  */
 
-class Manageleader extends CI_Controller {
+class Manageleader extends MY_Admin_Controller {
 
     public function __construct()
     {
