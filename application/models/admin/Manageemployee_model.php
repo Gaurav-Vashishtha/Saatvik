@@ -41,4 +41,11 @@ public function get_all($filters = [])
     {
         return $this->db->where('id', $id)->delete($this->table);
     }
+
+    public function get_all_active(){
+        return $this->db->where('active', 1)
+                     ->order_by('id', 'DESC')
+                     ->get($this->table)
+                     ->result();
+    }
 }

@@ -136,6 +136,10 @@ $route['admin/manage-leadership/edit/(:num)'] = 'admin/superadmin/Manageleader/e
 $route['admin/manage-leadership/delete/(:num)'] = 'admin/superadmin/Manageleader/delete/$1';
 $route['admin/manage-leadership/toggle/(:num)'] = 'admin/superadmin/Manageleader/toggle/$1';
 
+$route['admin/admin-roles'] = 'admin/superadmin/Adminroles/index';
+$route['admin/admin-roles/create'] = 'admin/superadmin/Adminroles/create';
+$route['admin/admin-roles/edit/(:num)'] = 'admin/superadmin/Adminroles/edit/$1';
+
 
 
 

@@ -1,12 +1,13 @@
 <div class="card shadow-sm">
 
-    <div class="card-header d-flex justify-content-between">
+    <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">Moments</h5>
 
-        <a href="<?= site_url('admin/manage-moments/create'); ?>" 
-           class="btn btn-primary btn-sm">
-           <i class="fa fa-plus"></i> Add Moment
-        </a>
+        <?php if(checkPermission('admin/manage-moments','add')): ?>
+            <a href="<?= site_url('admin/manage-moments/create'); ?>" class="btn btn-primary btn-sm">
+                <i class="fa fa-plus"></i> Add Moment
+            </a>
+        <?php endif; ?>
     </div>
 
     <div class="card-body table-responsive">
@@ -30,6 +31,7 @@
                 <tr>
 
                     <td><?= $i++; ?></td>
+
                     <td><?= $row->title ?></td>
 
                     <td>
@@ -38,33 +40,49 @@
                         <?php endif; ?>
                     </td>
 
-
                     <td>
+
                         <?php if($row->is_active == 1): ?>
-                            <a href="<?= base_url('admin/manage-moments/toggle/'.$row->id); ?>"
-                               class="badge bg-success text-decoration-none px-3 py-2">
-                               Active
-                            </a>
+
+                            <?php if(checkPermission('admin/manage-moments','edit')): ?>
+                                <a href="<?= site_url('admin/manage-moments/toggle/'.$row->id); ?>"
+                                   class="badge bg-success text-decoration-none px-3 py-2">
+                                   Active
+                                </a>
+                            <?php else: ?>
+                                <span class="badge bg-success px-3 py-2">Active</span>
+                            <?php endif; ?>
+
                         <?php else: ?>
-                            <a href="<?= base_url('admin/manage-moments/toggle/'.$row->id); ?>"
-                               class="badge bg-danger text-decoration-none px-3 py-2">
-                               Inactive
-                            </a>
+
+                            <?php if(checkPermission('admin/manage-moments','edit')): ?>
+                                <a href="<?= site_url('admin/manage-moments/toggle/'.$row->id); ?>"
+                                   class="badge bg-danger text-decoration-none px-3 py-2">
+                                   Inactive
+                                </a>
+                            <?php else: ?>
+                                <span class="badge bg-danger px-3 py-2">Inactive</span>
+                            <?php endif; ?>
+
                         <?php endif; ?>
+
                     </td>
 
                     <td>
 
-                        <a href="<?= base_url('admin/manage-moments/edit/'.$row->id); ?>"
-                           class="btn btn-sm btn-warning">
-                           <i class="fa fa-edit"></i>
-                        </a>
+                        <?php if(checkPermission('admin/manage-moments','edit')): ?>
+                            <a href="<?= site_url('admin/manage-moments/edit/'.$row->id); ?>" class="btn btn-sm btn-warning">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                        <?php endif; ?>
 
-                        <a href="<?= base_url('admin/manage-moments/delete/'.$row->id); ?>"
-                           class="btn btn-sm btn-danger"
-                           onclick="return confirm('Delete this record?');">
-                           <i class="fa fa-trash"></i>
-                        </a>
+                        <?php if(checkPermission('admin/manage-moments','delete')): ?>
+                            <a href="<?= site_url('admin/manage-moments/delete/'.$row->id); ?>"
+                               class="btn btn-sm btn-danger"
+                               onclick="return confirm('Delete this record?');">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        <?php endif; ?>
 
                     </td>
 

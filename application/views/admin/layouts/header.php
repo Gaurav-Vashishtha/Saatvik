@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title><?php echo isset($title) ? $title . ' - Admin' : 'Admin Dashboard'; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="/assets/img/site-logo.PNG">
+    <link rel="icon" href="/assets/img/site-logo.PNG">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -69,7 +69,7 @@
 
         .sidebar .logo img {
             width: 170px;
-       
+
         }
 
         .sidebar .nav {
@@ -117,11 +117,14 @@
             background: #34495e;
             padding: 0px;
         }
+
         .submenu li {
-    list-style-type: none;
-}.submenu {
-    padding: 0;
-}
+            list-style-type: none;
+        }
+
+        .submenu {
+            padding: 0;
+        }
 
         .main-content {
             margin-left: 220px;
@@ -144,7 +147,7 @@
         }
 
         .breadcrumb {
-          background: transparent;
+            background: transparent;
         }
 
         .breadcrumb-item a {
@@ -160,6 +163,7 @@
             color: #000;
             visibility: visible;
         }
+
         .note-btn-group.btn-group.show .note-icon-menu-check:before {
             content: "\f11e";
             visibility: hidden;
@@ -170,110 +174,55 @@
 <body>
 
 
-    
+
 
     <div class="sidebar">
         <div class="logo">
             <img src="<?php echo base_url('assets/images/saatvik.png'); ?>" alt="Logo">
         </div>
 
-        <?php $role_id = $this->session->userdata('role_id'); ?>
+        <?php
+        $role_id = $this->session->userdata('role_id');
+
+        $sidebars = $this->db
+            ->where('status', 1)
+            ->order_by('sort_order', 'ASC')
+            ->get('admin_sidebar')
+            ->result();
+        ?>
 
         <ul class="nav">
 
-            <li class="<?php echo (isset($title) && strpos($title, 'Dashboard') !== false) ? 'active' : ''; ?>">
-                <a href="<?php echo site_url('admin/dashboard'); ?>">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-    
-            <?php if ($role_id == 1): ?>
-            <li class="<?= ($this->uri->segment(2) == 'manage-hr') ? 'active' : ''; ?>">
-                <a href="<?= site_url('admin/manage-hr'); ?>">
-                    <i class="fas fa-users"></i>
-                    <span>Manage Admin User</span>
-                </a>
-            </li>
-            <?php endif; ?>
-            <li class="<?php echo (isset($title) && strpos($title, 'Manage Employee') !== false) ? 'active' : ''; ?>">
-                <a href="<?php echo site_url('admin/employee'); ?>">
-                    <i class="fa fa-user-tie"></i>
-                    <span>Manage Employee</span>
-                </a>
-            </li>
+            <?php foreach ($sidebars as $menu): ?>
 
-            <li class="<?php echo (isset($title) && strpos($title, 'Manage Policy Procedures') !== false) ? 'active' : ''; ?>">
-                <a href="<?php echo site_url('admin/policy-procedures'); ?>">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Manage Policy & Procedures</span>
-                </a>
-            </li>
+                <?php if (hasSidebarAccess($menu->url_slug)): ?>
 
-            <li class="<?= ($this->uri->segment(2) == 'manage-quiz') ? 'active' : ''; ?>">
-                <a href="<?= site_url('admin/manage-quiz'); ?>">
-                    <i class="fas fa-question-circle"></i>
-                    <span>Manage Quiz</span>
-                </a>
-            </li>
+                    <li class="<?= ($this->uri->uri_string() == $menu->url_slug) ? 'active' : '' ?>">
 
-            <li class="<?= ($this->uri->segment(2) == 'manage-learning-material') ? 'active' : ''; ?>">
-                <a href="<?= site_url('admin/manage-learning-material'); ?>">
-                    <i class="fas fa-book"></i>
-                    <span>Manage Learning Material</span>
-                </a>
-            </li>
+                        <a href="<?= site_url($menu->url_slug) ?>">
 
-            <li class="<?= ($this->uri->segment(2) == 'manage-news-events') ? 'active' : ''; ?>">
-                <a href="<?= site_url('admin/manage-news-events'); ?>">
-                    <i class="fas fa-newspaper"></i>
-                    <span>Manage News & Events</span>
-                </a>
-            </li>
+                            <i class="<?= $menu->icon ?>"></i>
 
-            <li class="<?= ($this->uri->segment(2) == 'manage-moments') ? 'active' : ''; ?>">
-                <a href="<?= site_url('admin/manage-moments'); ?>">
-                    <i class="fas fa-camera"></i>
-                    <span>Manage Moments</span>
-                </a>
-            </li>
+                            <span><?= $menu->name ?></span>
 
-            <li class="<?= ($this->uri->segment(2) == 'manage-leadership-desk') ? 'active' : ''; ?>">
-                <a href="<?= site_url('admin/manage-leadership-desk'); ?>">
-                    <i class="fas fa-user-tie"></i>
-                    <span>Manage Leadership Desk</span>
-                </a>
-            </li>
+                        </a>
 
-            <li class="<?= ($this->uri->segment(2) == 'manage-departmental-information') ? 'active' : ''; ?>">
-                <a href="<?= site_url('admin/manage-departmental-information'); ?>">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Manage Departmental Information</span>
-                </a>
-            </li>
-            <li class="<?= ($this->uri->segment(2) == 'manage-apps') ? 'active' : ''; ?>">
-                <a href="<?= site_url('admin/manage-apps'); ?>">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Manage Apps</span>
-                </a>
-            </li>
+                    </li>
 
-            <li class="<?= ($this->uri->segment(2) == 'manage-leadership') ? 'active' : ''; ?>">
-                <a href="<?= site_url('admin/manage-leadership'); ?>">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Manage Leader</span>
-                </a>
-            </li>
+                <?php endif; ?>
+
+            <?php endforeach; ?>
+
 
             <li>
-                <a href="<?php echo site_url('admin/change_password'); ?>">
+                <a href="<?= site_url('admin/change_password'); ?>">
                     <i class="fas fa-key"></i>
                     <span>Change Password</span>
                 </a>
             </li>
 
             <li>
-                <a href="<?php echo site_url('admin/logout'); ?>">
+                <a href="<?= site_url('admin/logout'); ?>">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                 </a>
@@ -292,45 +241,50 @@
             </button>
 
             <div>
-                <?php 
-                    $role_id = $this->session->userdata('role_id');
+                <?php
+                $role_id = $this->session->userdata('role_id');
 
-                    if ($role_id == 1) {
-                        $welcome_text = 'Superadmin';
-                    } else {
-                        $ci =& get_instance();
-                        $ci->load->database();
+                if ($role_id == 1) {
+                    $welcome_text = 'Superadmin';
+                } else {
+                    $ci = &get_instance();
+                    $ci->load->database();
 
-                        $role = $ci->db->select('name')->from('roles')->where('id', $role_id)->get()->row();
-                        $welcome_text = $role->name ?? ($ci->session->userdata('admin_name') ?? 'Admin');
-                    }
-                    ?>
-                    Welcome, <strong><?php echo $welcome_text; ?></strong>
+                   $role = $ci->db
+                    ->select('name')
+                    ->from('admin_roles')
+                    ->where('id', $role_id)
+                    ->get()
+                    ->row();
+                    $welcome_text = $role->name ?? ($ci->session->userdata('admin_name') ?? 'Admin');
+                }
+                ?>
+                Welcome, <strong><?php echo $welcome_text; ?></strong>
             </div>
         </div>
 
         <div class="content-area container-fluid">
             <?php if (isset($breadcrumb) && is_array($breadcrumb)): ?>
-            <div class="mb-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb small mb-0">
-                        <?php foreach ($breadcrumb as $key => $crumb): ?>
-                            <?php if ($key === array_key_last($breadcrumb)): ?>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    <?php echo $crumb['name']; ?>
-                                </li>
-                            <?php else: ?>
-                                <li class="breadcrumb-item">
-                                    <a href="<?php echo $crumb['url']; ?>">
+                <div class="mb-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb small mb-0">
+                            <?php foreach ($breadcrumb as $key => $crumb): ?>
+                                <?php if ($key === array_key_last($breadcrumb)): ?>
+                                    <li class="breadcrumb-item active" aria-current="page">
                                         <?php echo $crumb['name']; ?>
-                                    </a>
-                                </li>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </ol>
-                </nav>
-            </div>
-        <?php endif; ?>
+                                    </li>
+                                <?php else: ?>
+                                    <li class="breadcrumb-item">
+                                        <a href="<?php echo $crumb['url']; ?>">
+                                            <?php echo $crumb['name']; ?>
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ol>
+                    </nav>
+                </div>
+            <?php endif; ?>
 
             <?php if ($this->session->flashdata('success')): ?>
                 <div class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
@@ -350,25 +304,25 @@
 
 
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
 
-    document.addEventListener("change", function (e) {
+                    document.addEventListener("change", function(e) {
 
-        if (e.target.type === "file") {
+                        if (e.target.type === "file") {
 
-            const file = e.target.files[0];
-            if (!file) return;
+                            const file = e.target.files[0];
+                            if (!file) return;
 
-            const maxSize = 2 * 1024 * 1024; 
+                            const maxSize = 2 * 1024 * 1024;
 
-            if (file.size > maxSize) {
-                alert("File must be less than 2MB");
-                e.target.value = "";
-            }
-        }
+                            if (file.size > maxSize) {
+                                alert("File must be less than 2MB");
+                                e.target.value = "";
+                            }
+                        }
 
-    });
+                    });
 
-});
-</script>
+                });
+            </script>

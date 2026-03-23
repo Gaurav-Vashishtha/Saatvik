@@ -28,9 +28,9 @@ class Managehr_model extends CI_Model {
 
         public function get_by_id($id)
         {
-            $this->db->select('users.*, roles.name as role_name'); 
+            $this->db->select('users.*, admin_roles.name as role_name'); 
             $this->db->from('users');
-            $this->db->join('roles', 'roles.id = users.role_id', 'left'); 
+            $this->db->join('admin_roles', 'admin_roles.id = users.role_id', 'left'); 
             $this->db->where('users.id', $id);
             return $this->db->get()->row(); 
         }
@@ -67,7 +67,7 @@ class Managehr_model extends CI_Model {
             return $this->db
                 ->where('id !=', 1) 
                 ->where('status', 1)
-                ->get('roles')
+                ->get('admin_roles')
                 ->result();
         }
 }

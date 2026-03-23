@@ -15,6 +15,7 @@
         </h5>
 
         <div class="d-flex gap-2">
+
             <select id="section-filter" class="form-control">
                 <?php foreach ($sections as $slug => $label): ?>
                     <option value="<?= $slug ?>" <?= ($section == $slug) ? 'selected' : '' ?>>
@@ -23,9 +24,9 @@
                 <?php endforeach ?>
             </select>
 
-            <?php if ($section): ?>
+            <?php if ($section && checkPermission('admin/manage-departmental-information','add')): ?>
                 <a href="<?= site_url('admin/manage-departmental-information/create'); ?>"
-                    class="btn btn-primary btn-sm d-flex align-items-center">
+                   class="btn btn-primary btn-sm d-flex align-items-center">
                     <i class="fa fa-plus me-1"></i>
                     <span>Add</span>
                 </a>
@@ -61,29 +62,47 @@
 
                         <td>
                             <?php if ($row->status == 1): ?>
-                                <a href="<?= base_url('admin/manage-departmental-information/toggle/'.$row->id); ?>"
-                                   class="badge bg-success text-decoration-none px-3 py-2">
-                                   Active
-                                </a>
+
+                                <?php if(checkPermission('admin/manage-departmental-information','edit')): ?>
+                                    <a href="<?= site_url('admin/manage-departmental-information/toggle/'.$row->id); ?>"
+                                       class="badge bg-success text-decoration-none px-3 py-2">
+                                       Active
+                                    </a>
+                                <?php else: ?>
+                                    <span class="badge bg-success px-3 py-2">Active</span>
+                                <?php endif; ?>
+
                             <?php else: ?>
-                                <a href="<?= base_url('admin/manage-departmental-information/toggle/'.$row->id); ?>"
-                                   class="badge bg-danger text-decoration-none px-3 py-2">
-                                   Inactive
-                                </a>
+
+                                <?php if(checkPermission('admin/manage-departmental-information','edit')): ?>
+                                    <a href="<?= site_url('admin/manage-departmental-information/toggle/'.$row->id); ?>"
+                                       class="badge bg-danger text-decoration-none px-3 py-2">
+                                       Inactive
+                                    </a>
+                                <?php else: ?>
+                                    <span class="badge bg-danger px-3 py-2">Inactive</span>
+                                <?php endif; ?>
+
                             <?php endif ?>
                         </td>
 
                         <td>
-                            <a href="<?= base_url('admin/manage-departmental-information/edit/'.$row->id); ?>"
-                               class="btn btn-sm btn-warning">
-                               <i class="fa fa-edit"></i>
-                            </a>
 
-                            <a href="<?= base_url('admin/manage-departmental-information/delete/'.$row->id); ?>"
-                               class="btn btn-sm btn-danger"
-                               onclick="return confirm('Delete this record?');">
-                               <i class="fa fa-trash"></i>
-                            </a>
+                            <?php if(checkPermission('admin/manage-departmental-information','edit')): ?>
+                                <a href="<?= site_url('admin/manage-departmental-information/edit/'.$row->id); ?>"
+                                   class="btn btn-sm btn-warning">
+                                   <i class="fa fa-edit"></i>
+                                </a>
+                            <?php endif; ?>
+
+                            <?php if(checkPermission('admin/manage-departmental-information','delete')): ?>
+                                <a href="<?= site_url('admin/manage-departmental-information/delete/'.$row->id); ?>"
+                                   class="btn btn-sm btn-danger"
+                                   onclick="return confirm('Delete this record?');">
+                                   <i class="fa fa-trash"></i>
+                                </a>
+                            <?php endif; ?>
+
                         </td>
 
                     </tr>
