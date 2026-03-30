@@ -36,109 +36,77 @@ class Adminroles extends MY_Admin_Controller {
         $this->load->view('admin/layouts/footer');
     }
 
-    // public function edit($id)
-    // {
-
-    //     $data['role']=$this->db->where('id',$id)->get('admin_roles')->row();
-
-    //    $data['sidebars']=$this->db
-    //         ->where('status',1)
-    //         ->order_by('sort_order','ASC')
-    //         ->get('admin_sidebar')
-    //         ->result();
-
-    //     if($this->input->post()){
-
-    //         $this->db->where('id',$id)->update('admin_roles',[
-    //             'name'=>$this->input->post('name'),
-    //             'status'=>$this->input->post('status')
-    //         ]);
-
-    //         $this->db->where('role_id',$id)->delete('admin_permission');
-
-    //         $permissions=$this->input->post('permission');
-
-    //         if($permissions){
-
-    //             foreach($permissions as $sidebar_id=>$perm){
-
-    //                 $this->db->insert('admin_permission',[
-
-    //                     'role_id'=>$id,
-    //                     'sidebar_id'=>$sidebar_id,
-    //                     'can_view'=>isset($perm['view'])?1:0,
-    //                     'can_add'=>isset($perm['add'])?1:0,
-    //                     'can_edit'=>isset($perm['edit'])?1:0,
-    //                     'can_delete'=>isset($perm['delete'])?1:0
-
-    //                 ]);
-    //             }
-
-    //         }
-
-    //         redirect('admin/admin-roles');
-
-    //     }
-
-    //     $this->load->view('admin/layouts/header');
-    //     $this->load->view('admin/roles/edit',$data);
-    //     $this->load->view('admin/layouts/footer');
-    // }
 
     public function edit($id)
-{
-    $data['role'] = $this->db->where('id', $id)->get('admin_roles')->row();
+    {
+        $data['role'] = $this->db->where('id', $id)->get('admin_roles')->row();
 
-    $data['sidebars'] = $this->db
-        ->where('status', 1)
-        ->order_by('sort_order', 'ASC')
-        ->get('admin_sidebar')
-        ->result();
+        $data['sidebars'] = $this->db
+            ->where('status', 1)
+            ->order_by('sort_order', 'ASC')
+            ->get('admin_sidebar')
+            ->result();
 
-    $permissions = $this->db
-        ->where('role_id', $id)
-        ->get('admin_permission')
-        ->result();
+        $permissions = $this->db
+            ->where('role_id', $id)
+            ->get('admin_permission')
+            ->result();
 
-    $perm_data = [];
+        $perm_data = [];
 
-    foreach ($permissions as $p) {
-        $perm_data[$p->sidebar_id] = $p;
+        foreach ($permissions as $p) {
+            $perm_data[$p->sidebar_id] = $p;
+        }
+
+        $data['permissions'] = $perm_data;
+
+        if ($this->input->post()) {
+
+            $this->db->where('id', $id)->update('admin_roles', [
+                'name' => $this->input->post('name'),
+                'status' => $this->input->post('status')
+            ]);
+
+            $this->db->where('role_id', $id)->delete('admin_permission');
+
+            $permissions = $this->input->post('permission');
+
+            if ($permissions) {
+                foreach ($permissions as $sidebar_id => $perm) {
+
+                    $this->db->insert('admin_permission', [
+                        'role_id' => $id,
+                        'sidebar_id' => $sidebar_id,
+                        'can_view' => isset($perm['view']) ? 1 : 0,
+                        'can_add' => isset($perm['add']) ? 1 : 0,
+                        'can_edit' => isset($perm['edit']) ? 1 : 0,
+                        'can_delete' => isset($perm['delete']) ? 1 : 0
+                    ]);
+                }
+            }
+
+            redirect('admin/admin-roles');
+        }
+
+        $this->load->view('admin/layouts/header');
+        $this->load->view('admin/roles/edit', $data);
+        $this->load->view('admin/layouts/footer');
     }
+  
+    public function toggle($id)
+    {
+        $role = $this->db->where('id', $id)->get('admin_roles')->row();
 
-    $data['permissions'] = $perm_data;
+        if (!$role) {
+            show_404();
+        }
 
-    if ($this->input->post()) {
+        $new_status = ($role->status == 1) ? 0 : 1;
 
         $this->db->where('id', $id)->update('admin_roles', [
-            'name' => $this->input->post('name'),
-            'status' => $this->input->post('status')
+            'status' => $new_status
         ]);
-
-        $this->db->where('role_id', $id)->delete('admin_permission');
-
-        $permissions = $this->input->post('permission');
-
-        if ($permissions) {
-            foreach ($permissions as $sidebar_id => $perm) {
-
-                $this->db->insert('admin_permission', [
-                    'role_id' => $id,
-                    'sidebar_id' => $sidebar_id,
-                    'can_view' => isset($perm['view']) ? 1 : 0,
-                    'can_add' => isset($perm['add']) ? 1 : 0,
-                    'can_edit' => isset($perm['edit']) ? 1 : 0,
-                    'can_delete' => isset($perm['delete']) ? 1 : 0
-                ]);
-            }
-        }
 
         redirect('admin/admin-roles');
     }
-
-    $this->load->view('admin/layouts/header');
-    $this->load->view('admin/roles/edit', $data);
-    $this->load->view('admin/layouts/footer');
-}
-
 }

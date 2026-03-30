@@ -52,8 +52,7 @@ class manageHR extends MY_Admin_Controller {
 
     public function create()
     {
-        $this->form_validation->set_rules('first_name', 'First Name', 'required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+        $this->form_validation->set_rules('full_name', 'Full Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
         $this->form_validation->set_rules('phone', 'Phone', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
@@ -85,19 +84,25 @@ class manageHR extends MY_Admin_Controller {
         
         $payload = [
             'employee_code'     => $employee_code,
-            'first_name'        => $post['first_name'],
-            'last_name'         => $post['last_name'],
-            'email'             => $post['email'],
-            'phone'             => $post['phone'],
             'password'          => password_hash($post['password'], PASSWORD_DEFAULT),
             'role_id'           => $post['role_id'],
+            'full_name'        => $post['full_name'] ?? '',
+            'salutation'         => $post['salutation'] ?? '',
             'gender'            => $post['gender'] ?? NULL,
             'date_of_birth'     => !empty($post['date_of_birth']) ? $post['date_of_birth'] : NULL,
             'marital_status'    => $post['marital_status'] ?? NULL,
             'anniversary_date'  => !empty($post['anniversary_date']) ? $post['anniversary_date'] : NULL,
+            'email'             => $post['email'] ?? '',
+            'phone'             => $post['phone'] ?? '',
+            'designation'       => $post['designation'] ?? '',
             'department'        => $post['department'] ?? '',
-            'address'           => $post['address'] ?? '',
+            'location_name'     => $post['location_name'] ?? '',
             'image'          => $uploaded_image,
+            'company_name'    => $post['company_name'] ?? '',
+            'salutation'      => $post['salutation'] ?? '',
+            'age'             => $post['age'] ?? NULL,
+            'date_of_joining' => !empty($post['date_of_joining']) ? $post['date_of_joining'] : NULL,
+            'remark'          => $post['remark'] ?? '',
             'is_active'     => isset($post['status']) ? 1 : 0,
             'created_at' => date('Y-m-d H:i:s'),
         ];
@@ -118,8 +123,7 @@ class manageHR extends MY_Admin_Controller {
         $hr = $this->Managehr_model->get_by_id($id);
         if (!$hr) show_404();
 
-        $this->form_validation->set_rules('first_name', 'First Name', 'required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+        $this->form_validation->set_rules('full_name', 'Full Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('phone', 'Phone', 'required');
 
@@ -146,16 +150,22 @@ class manageHR extends MY_Admin_Controller {
         $post = $this->input->post(NULL, TRUE);
         $uploaded_image = _upload_file('image', './uploads/hr/',$hr->image);
         $payload = [
-            'first_name'        => $post['first_name'],
-            'last_name'         => $post['last_name'],
-            'email'             => $post['email'],
-            'phone'             => $post['phone'],
+            'full_name'        => $post['full_name'] ?? '',
+            'salutation'         => $post['salutation'] ?? '',
             'gender'            => $post['gender'] ?? NULL,
             'date_of_birth'     => !empty($post['date_of_birth']) ? $post['date_of_birth'] : NULL,
             'marital_status'    => $post['marital_status'] ?? NULL,
             'anniversary_date'  => !empty($post['anniversary_date']) ? $post['anniversary_date'] : NULL,
+            'email'             => $post['email'] ?? '',
+            'phone'             => $post['phone'] ?? '',
+            'designation'       => $post['designation'] ?? '',
             'department'        => $post['department'] ?? '',
-            'address'           => $post['address'] ?? '',
+            'location_name'           => $post['location_name'] ?? '', 
+            'company_name'    => $post['company_name'] ?? '',
+            'salutation'      => $post['salutation'] ?? '',
+            'age'             => $post['age'] ?? NULL,
+            'date_of_joining' => !empty($post['date_of_joining']) ? $post['date_of_joining'] : NULL,
+            'remark'          => $post['remark'] ?? '',
             'image'    => $uploaded_image ?? $hr->image ,
             'is_active'     => isset($post['status']) ? 1 : 0,
             'updated_at' => date('Y-m-d H:i:s'),

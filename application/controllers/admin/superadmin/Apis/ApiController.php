@@ -40,43 +40,49 @@ class ApiController extends CI_Controller
     }
 
 //birthdays
-    public function get_this_month_birthday()
-    {
-        $currentMonth = date('m');
+public function get_this_month_birthday()
+{
+    $currentMonth = date('m');
 
-        $this->db->select('CONCAT(first_name, " ", last_name) as name, date_of_birth, image');
-        $this->db->where('role_id', 2);
-        $this->db->where('is_active', 1);
-        $this->db->where('MONTH(date_of_birth)', $currentMonth);
-        $this->db->order_by('DAY(date_of_birth)', 'ASC');
-        $users = $this->db->get('users')->result_array();
+    $this->db->select('CONCAT(first_name, " ", last_name) as name, date_of_birth, image');
+    $this->db->where('role_id', 2);
+    $this->db->where('is_active', 1);
+    $this->db->where('MONTH(date_of_birth)', $currentMonth);
+    $users = $this->db->get('users')->result_array();
 
-        foreach ($users as &$user) {
-            $user['image'] = !empty($user['image']) ? base_url('uploads/hr/' . $user['image']) : base_url('uploads/default.png');
-        }
-
-        $this->db->select('CONCAT(first_name, " ", last_name) as name, date_of_birth, employee_image as image');
-        $this->db->where('is_active', 1);
-        $this->db->where('MONTH(date_of_birth)', $currentMonth);
-        $this->db->order_by('DAY(date_of_birth)', 'ASC');
-        $employees = $this->db->get('employees')->result_array();
-
-        foreach ($employees as &$emp) {
-            $emp['image'] = !empty($emp['image']) ? base_url('uploads/employee/' . $emp['image']) : base_url('uploads/default.png');
-            unset($emp['employee_image']);
-        }
-
-        $response = [
-            'status' => true,
-            'message' => 'Birthday list for this month',
-            'users' => $users,
-            'employees' => $employees
-        ];
-
-        return $this->output
-            ->set_status_header(200)
-            ->set_output(json_encode($response));
+    foreach ($users as &$user) {
+        $user['image'] = !empty($user['image']) 
+            ? base_url('uploads/hr/' . $user['image']) 
+            : base_url('uploads/default.png');
     }
+
+    $this->db->select('CONCAT(first_name, " ", last_name) as name, date_of_birth, employee_image as image');
+    $this->db->where('is_active', 1);
+    $this->db->where('MONTH(date_of_birth)', $currentMonth);
+    $employees = $this->db->get('employees')->result_array();
+
+    foreach ($employees as &$emp) {
+        $emp['image'] = !empty($emp['image']) 
+            ? base_url('uploads/employee/' . $emp['image']) 
+            : base_url('uploads/default.png');
+    }
+
+    $birthdays = array_merge($users, $employees);
+
+    usort($birthdays, function ($a, $b) {
+        return date('d', strtotime($a['date_of_birth'])) - date('d', strtotime($b['date_of_birth']));
+    });
+
+    $response = [
+        'status' => true,
+        'message' => 'Birthday list for this month',
+        'data' => $birthdays
+    ];
+
+    return $this->output
+        ->set_status_header(200)
+        ->set_output(json_encode($response));
+}
 
 
 //moments

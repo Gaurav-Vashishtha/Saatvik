@@ -11,14 +11,20 @@
 
             <div class="row">
 
-                <div class="col-md-6 mb-3">
-                    <label class="form-label ">First Name *</label>
-                    <input type="text" name="first_name" class="form-control" required>
-                </div>
+               <div class="col-md-6 mb-3">
+                <label class="form-label">Salutation</label>
+                <select name="salutation" class="form-select">
+                <option value="">Select</option>
+                <option value="Mr">Mr</option>
+                <option value="Ms">Ms</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Dr">Dr</option>
+                </select>
+               </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label ">Last Name</label>
-                    <input type="text" name="last_name" class="form-control">
+                    <label class="form-label ">Full Name *</label>
+                    <input type="text" name="full_name" class="form-control" required>
                 </div>
 
                 <div class="col-md-6 mb-3">
@@ -30,10 +36,23 @@
                         <option value="Other">Other</option>
                     </select>
                 </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Company Name</label>
+                    <input type="text" name="company_name" class="form-control">
+                </div>
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label ">Date of Birth</label>
                     <input type="date" name="date_of_birth" class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Date Of Joining</label>
+                    <input type="date" name="date_of_joining" class="form-control">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Age</label>
+                    <input type="number" name="age" class="form-control">
                 </div>
 
                 <div class="col-md-6 mb-3">
@@ -70,9 +89,13 @@
                     <input type="text" name="department" class="form-control">
                 </div>
 
+                <div class="col-md-6 mb-3">
+                    <label class="form-label ">Location Name</label>
+                    <input type="text" name="location_name" class="form-control">
+                </div>
                 <div class="col-md-12 mb-3">
-                    <label class="form-label ">Address</label>
-                    <textarea name="address" class="form-control"></textarea>
+                    <label class="form-label">Remark</label>
+                    <textarea name="remark" class="form-control"></textarea>
                 </div>
 
                 <!-- <div class="col-md-4 mb-3">

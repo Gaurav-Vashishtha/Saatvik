@@ -43,7 +43,7 @@
 
                         <td><?php echo $i++; ?></td>
 
-                        <td><?php echo $emp->first_name.' '.$emp->last_name; ?></td>
+                        <td><?php echo $emp->full_name; ?></td>
 
                         <td><?php echo $emp->employee_code; ?></td>
 

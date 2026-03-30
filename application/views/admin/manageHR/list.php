@@ -38,7 +38,7 @@
 
                                 <td><?= $i++; ?></td>
 
-                                <td><?= $hr->first_name . ' ' . $hr->last_name; ?></td>
+                                <td><?= $hr->full_name; ?></td>
 
                                 <td><?= $hr->employee_code; ?></td>
 
@@ -82,13 +82,13 @@
                                         </a>
                                     <?php endif; ?>
 
-                                    <?php if(checkPermission('admin/manage-hr','delete')): ?>
-                                        <a href="<?= site_url('admin/manage-hr/delete/'.$hr->id); ?>"
+                                    <?php // if(checkPermission('admin/manage-hr','delete')): ?>
+                                        <!-- <a href="<? //= site_url('admin/manage-hr/delete/'.$hr->id); ?>"
                                            class="btn btn-sm btn-danger"
                                            onclick="return confirm('Are you sure you want to delete this User?');">
                                             <i class="fa fa-trash"></i>
-                                        </a>
-                                    <?php endif; ?>
+                                        </a> -->
+                                    <?php  // endif; ?>
 
                                 </td>
 

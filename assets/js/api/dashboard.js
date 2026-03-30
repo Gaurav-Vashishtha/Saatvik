@@ -1,46 +1,52 @@
 var BASE_URL = window.location.origin;
 
 // birthdays
-function loadBirthdays() {
-    fetch(BASE_URL + "/satvik/api/get-this-month-birthday")
-        .then(res => res.json())
-        .then(data => {
 
-            let wrapper = document.getElementById("birthday-wrapper");
-            let html = "";
+document.addEventListener("DOMContentLoaded", function () {
 
-            if (data.users) {
-                data.users.forEach(user => {
-                    html += `
-                <div class="swiper-slide">
-                    <img src="${user.image ?? 'https://placehold.co/600x400'}" class="rounded-3 mb-2">
-                    <h6 class="mb-0 fw-semibold">${user.name ?? ''}</h6>
-                    <small class="text-muted">${user.date_of_birth}</small>
-                </div>`;
-                });
-            }
+    let birthdaySwiper = new Swiper(".birthday-swiper", {
+        slidesPerView: 2,
+        spaceBetween: 10,
+        pagination: {
+            el: ".birthday-pagination",
+            clickable: true,
+        },
+    });
 
-            if (data.employees) {
-                data.employees.forEach(emp => {
-                    html += `
-                <div class="swiper-slide">
-                    <img src="${emp.image ?? 'https://placehold.co/600x400'}" class="rounded-3 mb-2">
-                    <h6 class="mb-0 fw-semibold">${emp.name ?? ''}</h6>
-                    <small class="text-muted">${emp.date_of_birth}</small>
-                </div>`;
-                });
-            }
+    loadBirthdays();
 
-            wrapper.innerHTML = html;
+    function loadBirthdays() {
+        fetch(BASE_URL + "/satvik/api/get-this-month-birthday")
+            .then(res => res.json())
+            .then(result => {
 
-            if (typeof birthdaySwiper !== "undefined") {
+                console.log(result);
+
+                let wrapper = document.getElementById("birthday-wrapper");
+                if (!wrapper) return;
+
+                let html = "";
+
+                if (result.data) {
+                    result.data.forEach(item => {
+                        const imageUrl = item.image ?? 'https://placehold.co/600x400';
+
+                        html += `
+                            <div class="swiper-slide">
+                                <img src="${imageUrl}" class="rounded-3 mb-2">
+                                <h6 class="mb-0 fw-semibold">${item.name ?? ''}</h6>
+                                <small class="text-muted">${item.date_of_birth}</small>
+                            </div>`;
+                    });
+                }
+
+                wrapper.innerHTML = html;
                 birthdaySwiper.update();
-            }
+            })
+            .catch(err => console.error(err));
+    }
 
-        });
-}
-
-
+});
 // policies
 function loadPolicy() {
     fetch(BASE_URL + "/satvik/api/get-policies")

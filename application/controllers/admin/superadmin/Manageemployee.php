@@ -55,7 +55,7 @@ class Manageemployee extends MY_Admin_Controller {
 
     public function create()
     {
-        $this->form_validation->set_rules('first_name', 'First Name', 'required');
+        $this->form_validation->set_rules('full_name', 'First Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('phone', 'Phone', 'required');
 
@@ -80,8 +80,8 @@ class Manageemployee extends MY_Admin_Controller {
 
         $payload = [
             'employee_code'     => $employee_code,
-            'first_name'        => $post['first_name'] ?? '',
-            'last_name'         => $post['last_name'] ?? '',
+            'full_name'        => $post['full_name'] ?? '',
+            'salutation'         => $post['salutation'] ?? '',
             'gender'            => $post['gender'] ?? NULL,
             'date_of_birth'     => !empty($post['date_of_birth']) ? $post['date_of_birth'] : NULL,
             'marital_status'    => $post['marital_status'] ?? NULL,
@@ -90,11 +90,16 @@ class Manageemployee extends MY_Admin_Controller {
             'phone'             => $post['phone'] ?? '',
             'designation'       => $post['designation'] ?? '',
             'department'        => $post['department'] ?? '',
-            'address'           => $post['address'] ?? '',
+            'location_name'           => $post['location_name'] ?? '',
             'city'              => $post['city'] ?? '',
             'state'             => $post['state'] ?? '',
             'pincode'           => $post['pincode'] ?? '',
             'employee_image'    => $uploaded_image,
+            'company_name'    => $post['company_name'] ?? '',
+            'salutation'      => $post['salutation'] ?? '',
+            'age'             => $post['age'] ?? NULL,
+            'date_of_joining' => !empty($post['date_of_joining']) ? $post['date_of_joining'] : NULL,
+            'remark'          => $post['remark'] ?? '',
             'is_active'         => isset($post['is_active']) ? $post['is_active'] : 0,
             'updated_at'        => date('Y-m-d H:i:s')
         ];
@@ -112,7 +117,7 @@ class Manageemployee extends MY_Admin_Controller {
         $employee = $this->Manageemployee_model->get_by_id($id);
         if (!$employee) show_404();
 
-        $this->form_validation->set_rules('first_name', 'First Name', 'required');
+        $this->form_validation->set_rules('full_name', 'First Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('phone', 'Phone', 'required');
 
@@ -137,8 +142,8 @@ class Manageemployee extends MY_Admin_Controller {
         $uploaded_image = _upload_file('employee_image', './uploads/employee/', $employee->employee_image);
 
         $payload = [
-            'first_name'        => $post['first_name'] ?? '',
-            'last_name'         => $post['last_name'] ?? '',
+            'full_name'        => $post['full_name'] ?? '',
+            'salutation'         => $post['salutation'] ?? '',
             'gender'            => $post['gender'] ?? NULL,
             'date_of_birth'     => !empty($post['date_of_birth']) ? $post['date_of_birth'] : NULL,
             'marital_status'    => $post['marital_status'] ?? NULL,
@@ -147,11 +152,16 @@ class Manageemployee extends MY_Admin_Controller {
             'phone'             => $post['phone'] ?? '',
             'designation'       => $post['designation'] ?? '',
             'department'        => $post['department'] ?? '',
-            'address'           => $post['address'] ?? '',
+            'location_name'           => $post['location_name'] ?? '',
             'city'              => $post['city'] ?? '',
             'state'             => $post['state'] ?? '',
             'pincode'           => $post['pincode'] ?? '',
             'employee_image'    => $uploaded_image ?? $employee->employee_image,
+            'company_name'    => $post['company_name'] ?? '',
+            'salutation'      => $post['salutation'] ?? '',
+            'age'             => $post['age'] ?? NULL,
+            'date_of_joining' => !empty($post['date_of_joining']) ? $post['date_of_joining'] : NULL,
+            'remark'          => $post['remark'] ?? '',
             'is_active'         => isset($post['is_active']) ? $post['is_active'] : 0,
             'updated_at'        => date('Y-m-d H:i:s')
         ];
@@ -221,7 +231,7 @@ class Manageemployee extends MY_Admin_Controller {
                 fputcsv($output, [
                     $emp->id,
                     $emp->employee_code,
-                    $emp->first_name,
+                    $emp->full_name,
                     $emp->last_name,
                     $emp->gender,
                     $emp->date_of_birth,
@@ -231,7 +241,7 @@ class Manageemployee extends MY_Admin_Controller {
                     $emp->phone,
                     $emp->designation,
                     $emp->department,
-                    $emp->address,
+                    $emp->location_name,
                     $emp->employee_image,
                     $emp->is_active ? 'Active' : 'Inactive',
                     $emp->created_at,

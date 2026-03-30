@@ -43,7 +43,7 @@
 
                 <div class="col-md-6">
                     <label class="form-label ">
-                        Image <small>(Max size: 2MB | JPG/PNG/JPEG/WEBP)</small>
+                        Image <small>(Max size: 2MB | 200×200 | JPG/PNG/JPEG/WEBP)</small>
                     </label>
 
                     <input type="file"

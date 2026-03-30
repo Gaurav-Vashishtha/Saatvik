@@ -139,6 +139,7 @@ $route['admin/manage-leadership/toggle/(:num)'] = 'admin/superadmin/Manageleader
 $route['admin/admin-roles'] = 'admin/superadmin/Adminroles/index';
 $route['admin/admin-roles/create'] = 'admin/superadmin/Adminroles/create';
 $route['admin/admin-roles/edit/(:num)'] = 'admin/superadmin/Adminroles/edit/$1';
+$route['admin/admin-roles/toggle/(:num)'] = 'admin/superadmin/Adminroles/toggle/$1';
 
 
 

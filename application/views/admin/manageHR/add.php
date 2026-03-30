@@ -1,88 +1,95 @@
-<div class="container-fluid mt-4">
+<div class="card shadow-sm">
+    <div class="card-header">
+        <h5 class="mb-0">Add Admin User</h5>
+    </div>
 
-    <div class="card shadow-sm border">
+    <div class="card-body">
 
-        <div class="card-header ">
-            <h5 class="mb-0 ">Add Admin User</h5>
-        </div>
+        <?php echo validation_errors('<div class="alert alert-danger">','</div'); ?>
 
-        <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
 
-            <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
+            <div class="row">
 
-            <form method="post" enctype="multipart/form-data">
-
-                <div class="row g-3">
-
-                    <div class="col-md-6">
-                        <label class="form-label ">First Name *</label>
-                        <input type="text"
-                               name="first_name"
-                               class="form-control"
-                               value="<?php echo set_value('first_name'); ?>"
-                               placeholder="Enter First Name"
-                               required>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label ">Last Name *</label>
-                        <input type="text"
-                               name="last_name"
-                               class="form-control"
-                               value="<?php echo set_value('last_name'); ?>"
-                               placeholder="Enter Last Name"
-                               required>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label ">Role *</label>
-                        <select name="role_id" class="form-select" required>
-                            <option value="">Select Role</option>
-                            <?php if (!empty($roles)): ?>
-                                <?php foreach ($roles as $role): ?>
-                                    <option value="<?php echo $role->id; ?>" 
-                                        <?php echo set_select('role_id', $role->id); ?>>
-                                        <?php echo $role->name; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                        </select>
-                    </div>
-                    
-
-                    <div class="col-md-6">
-                        <label class="form-label ">Email *</label>
-                        <input type="email"
-                               name="email"
-                               class="form-control"
-                               value="<?php echo set_value('email'); ?>"
-                               placeholder="Enter Email"
-                               required>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label ">Phone No. *</label>
-                        <input type="text"
-                               name="phone"
-                               class="form-control"
-                               maxlength="10"
-                               pattern="[0-9]{10}"
-                               value="<?php echo set_value('phone'); ?>"
-                               placeholder="Enter 10 Digit Phone Number"
-                               required>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label ">Password *</label>
-                        <input type="password"
-                               name="password"
-                               class="form-control"
-                               placeholder="Enter Password"
-                               required>
-                    </div>
-                    
                 <div class="col-md-6 mb-3">
-                    <label class="form-label ">Gender</label>
+                    <label class="form-label">Salutation</label>
+                    <select name="salutation" class="form-select">
+                        <option value="">Select</option>
+                        <option value="Mr">Mr</option>
+                        <option value="Ms">Ms</option>
+                        <option value="Mrs">Mrs</option>
+                        <option value="Dr">Dr</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" name="full_name" class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Role *</label>
+                    <select name="role_id" class="form-select" required>
+                        <option value="">Select Role</option>
+                        <?php foreach ($roles as $role): ?>
+                            <option value="<?php echo $role->id; ?>"
+                                <?php echo set_select('role_id', $role->id); ?>>
+                                <?php echo $role->name; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Password *</label>
+                    <input type="password" name="password" class="form-control" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Company Name</label>
+                    <input type="text" name="company_name" class="form-control">
+                </div> 
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Date Of Joining</label>
+                    <input type="date" name="date_of_joining" class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Date of Birth</label>
+                    <input type="date" name="date_of_birth" class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Age</label>
+                    <input type="number" name="age" class="form-control">
+                </div>
+
+                <!-- <div class="col-md-6 mb-3">
+                    <label class="form-label">Marital Status</label>
+                    <select name="marital_status" id="marital_status" class="form-select">
+                        <option value="">Select Status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                    </select>
+                </div> -->
+
+                 <div class="col-md-6 mb-3">
+                    <label class="form-label ">Marital Status</label>
+                    <select name="marital_status" class="form-select">
+                        <option value="">Select Status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3" id="anniversary_section">
+                    <label class="form-label">Anniversary Date</label>
+                    <input type="date" name="anniversary_date" class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Gender</label>
                     <select name="gender" class="form-select">
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
@@ -92,64 +99,81 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label ">Marital Status</label>
-                    <select name="marital_status" class="form-select">
-                        <option value="">Select Status</option>
-                        <option value="Single">Single</option>
-                        <option value="Married">Married</option>
-                    </select>
+                    <label class="form-label">Email *</label>
+                    <input type="email" name="email" class="form-control"
+                        value="<?php echo set_value('email'); ?>" required>
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label ">Anniversary Date</label>
-                    <input type="date" name="anniversary_date" class="form-control">
+                    <label class="form-label">Phone *</label>
+                    <input type="text" name="phone" maxlength="10" pattern="[0-9]{10}"
+                        class="form-control"
+                        value="<?php echo set_value('phone'); ?>" required>
                 </div>
-                 <div class="col-md-6 mb-3">
-                    <label class="form-label ">Department</label>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Designation</label>
+                    <input type="text" name="designation" class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Department</label>
                     <input type="text" name="department" class="form-control">
                 </div>
+
                 <div class="col-md-6 mb-3">
-                    <label class="form-label ">Date of Birth</label>
-                    <input type="date" name="date_of_birth" class="form-control">
+                    <label class="form-label">Location Name</label>
+                    <input type="text" name="location_name" class="form-control">
                 </div>
+
+
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">Remark</label>
+                    <textarea name="remark" class="form-control"></textarea>
+                </div>
+
+
                 <div class="col-md-6 mb-3">
-                    <label class="form-label ">
+                    <label class="form-label">
                         Image <small>(Max size: 2MB | 200×200 | JPG/PNG/JPEG/WEBP)</small>
                     </label>
                     <input type="file" name="image" class="form-control">
                 </div>
 
-                <div class="col-md-12 mb-3">
-                    <label class="form-label ">Address</label>
-                    <textarea name="address" class="form-control"></textarea>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Status</label>
+                    <select name="status" class="form-select">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
                 </div>
 
-                    <div class="col-md-12">
-                        <label class="form-label ">Status</label>
-                        <select name="status" class="form-select">
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
-                    </div>
+            </div>
 
-                </div>
+            <div class="text-end">
+                <a href="<?php echo base_url('admin/manage-hr'); ?>" class="btn btn-secondary me-2">
+                    Cancel
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    Save Admin
+                </button>
+            </div>
 
-                <hr class="my-4">
-
-                <div class="d-flex justify-content-end">
-                    <a href="<?php echo base_url('admin/manage-hr'); ?>"
-                       class="btn btn-outline-secondary me-2">
-                        Cancel
-                    </a>
-
-                    <button type="submit" class="btn btn-success">
-                        Save 
-                    </button>
-                </div>
-
-            </form>
-
-        </div>
+        </form>
     </div>
-
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const maritalStatus = document.getElementById("marital_status");
+    const anniversarySection = document.getElementById("anniversary_section");
+
+    function toggleAnniversary() {
+        anniversarySection.style.display =
+            maritalStatus.value === "Married" ? "block" : "none";
+    }
+
+    toggleAnniversary();
+    maritalStatus.addEventListener("change", toggleAnniversary);
+});
+</script>
