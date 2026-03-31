@@ -29,8 +29,8 @@
                     </div>
 
                <div class="col-md-6 mb-3">
-                <label class="form-label">Salutation</label>
-                <select name="salutation" class="form-select">
+                <label class="form-label">Salutation*</label>
+                <select name="salutation" class="form-select" required>
                     <option value="">Select</option>
                     <option value="Mr" <?= ($employee->salutation=='Mr')?'selected':''; ?>>Mr</option>
                     <option value="Ms" <?= ($employee->salutation=='Ms')?'selected':''; ?>>Ms</option>

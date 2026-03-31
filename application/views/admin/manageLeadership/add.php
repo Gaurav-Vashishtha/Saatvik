@@ -26,7 +26,7 @@
                     
                    <div class="col-md-12">
                         <label class="form-label ">Description</label>
-                        <input type="text" name="description" id="description" class="form-control">
+                        <textarea name="description" id="description" class="form-control" ></textarea>
                     </div>
                     <div class="col-md-12">
                         <label class="form-label ">Image <small>(Max size: 2MB | 200×200 | JPG/PNG/JPEG/WEBP)</small></label>

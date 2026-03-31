@@ -43,11 +43,12 @@ class ApiController extends CI_Controller
 public function get_this_month_birthday()
 {
     $currentMonth = date('m');
+    $currentDay = date('d');
 
-    $this->db->select('CONCAT(first_name, " ", last_name) as name, date_of_birth, image');
-    $this->db->where('role_id', 2);
+    $this->db->select('CONCAT(salutation, " ", full_name) as name, date_of_birth, image');
     $this->db->where('is_active', 1);
     $this->db->where('MONTH(date_of_birth)', $currentMonth);
+    $this->db->where('DAY(date_of_birth) >=', $currentDay);
     $users = $this->db->get('users')->result_array();
 
     foreach ($users as &$user) {
@@ -56,9 +57,10 @@ public function get_this_month_birthday()
             : base_url('uploads/default.png');
     }
 
-    $this->db->select('CONCAT(first_name, " ", last_name) as name, date_of_birth, employee_image as image');
+    $this->db->select('CONCAT(salutation, " ", full_name) as name, date_of_birth, employee_image as image');
     $this->db->where('is_active', 1);
     $this->db->where('MONTH(date_of_birth)', $currentMonth);
+    $this->db->where('DAY(date_of_birth) >=', $currentDay);
     $employees = $this->db->get('employees')->result_array();
 
     foreach ($employees as &$emp) {

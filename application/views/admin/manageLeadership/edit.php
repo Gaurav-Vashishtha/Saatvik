@@ -28,8 +28,7 @@
 
                    <div class="col-md-12">
                         <label class="form-label ">Description</label>
-                        <input type="text" name="description" id="description" class="form-control"
-                         value="<?= set_value('description', $leader->description) ?>" >
+                        <textarea id="description" name="description" class="form-control"><?= set_value('description', $leader->description) ?></textarea>
                     </div>
 
                     <div class="col-md-12">

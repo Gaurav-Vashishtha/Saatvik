@@ -11,21 +11,21 @@
     <form method="post">
 
         <div class="mb-3">
-            <label class="form-label ">Question</label>
-            <textarea name="question" class="form-control" rows="3"><?= set_value('question', $question->question); ?></textarea>
+            <label class="form-label ">Question*</label>
+            <textarea name="question" class="form-control" rows="3" required><?= set_value('question', $question->question); ?></textarea>
             <?= form_error('question', '<small class="text-danger">', '</small>'); ?>
         </div>
 
         <div class="mb-2">
-            <label class="form-label ">Option A</label>
+            <label class="form-label ">Option A *</label>
             <input type="text" name="option_a" class="form-control"
-                   value="<?= set_value('option_a', $question->option_a); ?>">
+                   value="<?= set_value('option_a', $question->option_a); ?>" required>
         </div>
 
         <div class="mb-2">
-            <label class="form-label ">Option B</label>
+            <label class="form-label ">Option B *</label>
             <input type="text" name="option_b" class="form-control"
-                   value="<?= set_value('option_b', $question->option_b); ?>">
+                   value="<?= set_value('option_b', $question->option_b); ?>" required>
         </div>
 
         <div class="mb-2">

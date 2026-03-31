@@ -1,40 +1,40 @@
 <div class="card">
 
-<div class="card-header">
+    <div class="card-header">
 
-<h5>Add Role</h5>
+        <h5>Add Role</h5>
 
-</div>
+    </div>
 
-<div class="card-body">
+    <div class="card-body">
 
-<form method="post">
+        <form method="post">
 
-<div class="mb-3">
+            <div class="mb-3">
 
-<label>Name</label>
+                <label>Name*</label>
 
-<input type="text" name="name" class="form-control">
+                <input type="text" name="name" class="form-control" required>
 
-</div>
+            </div>
 
-<div class="mb-3">
+            <div class="mb-3">
 
-<label>Status</label>
+                <label>Status</label>
 
-<select name="status" class="form-control">
+                <select name="status" class="form-control">
 
-<option value="1">Active</option>
-<option value="0">Inactive</option>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
 
-</select>
+                </select>
 
-</div>
+            </div>
 
-<button class="btn btn-primary">Save</button>
+            <button class="btn btn-primary">Save</button>
 
-</form>
+        </form>
 
-</div>
+    </div>
 
 </div>

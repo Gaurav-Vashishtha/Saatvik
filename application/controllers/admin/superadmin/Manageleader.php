@@ -123,6 +123,7 @@ class Manageleader extends MY_Admin_Controller {
             'updated_at' => date('Y-m-d H:i:s')
 
         ];
+        // print_r( $payload); die;
 
         $this->Manageleader_model->update($id,$payload);
 

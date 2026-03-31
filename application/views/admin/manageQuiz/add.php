@@ -9,12 +9,12 @@
     <form method="post">
 
         <div class="mb-3">
-            <label>Question</label>
-            <textarea name="question" class="form-control"><?= set_value('question') ?></textarea>
+            <label>Question*</label>
+            <textarea name="question" class="form-control" required><?= set_value('question') ?></textarea>
         </div>
 
-        <input type="text" name="option_a" placeholder="Option A" class="form-control mb-2">
-        <input type="text" name="option_b" placeholder="Option B" class="form-control mb-2">
+        <input type="text" name="option_a" placeholder="Option A" class="form-control mb-2" required>
+        <input type="text" name="option_b" placeholder="Option B" class="form-control mb-2" required>
         <input type="text" name="option_c" placeholder="Option C" class="form-control mb-2">
         <input type="text" name="option_d" placeholder="Option D" class="form-control mb-2">
 

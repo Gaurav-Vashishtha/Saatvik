@@ -8,12 +8,12 @@
         <form method="post">
 
             <div class="mb-3">
-                <label class="form-label ">Question</label>
+                <label class="form-label ">Question *</label>
                 <input type="text" 
                        name="question" 
                        class="form-control" 
                        value="<?php echo $learning_material->question; ?>"
-                       >
+                       required>
             </div>
 
             <div class="mb-3">
@@ -21,7 +21,7 @@
                 <textarea name="answer" 
                           class="form-control" 
                            id= "answer" 
-                          rows="3"><?php echo $learning_material->answer; ?></textarea>
+                          rows="3" ><?php echo $learning_material->answer; ?></textarea>
             </div>
 
 

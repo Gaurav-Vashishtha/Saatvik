@@ -65,7 +65,7 @@ class Managequiz extends MY_Admin_Controller {
             'option_c'       => $post['option_c'],
             'option_d'       => $post['option_d'],
             'correct_option' => $post['correct_option'],
-            'is_active'      => isset($post['status']) ? 1 : 0,
+            'is_active' => $post['status'] ?? 1,
             'created_at'     => date('Y-m-d H:i:s'),
         ];
 

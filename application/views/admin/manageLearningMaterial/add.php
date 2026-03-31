@@ -8,7 +8,7 @@
         <form method="post">
 
             <div class="mb-3">
-                <label class="form-label ">Question</label>
+                <label class="form-label ">Question *</label>
                 <input type="text" 
                        name="question" 
                        class="form-control" 
@@ -17,7 +17,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label ">Answer</label>
+                <label class="form-label ">Answer </label>
                 <textarea name="answer" 
                           class="form-control" 
                           id= "answer"

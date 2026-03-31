@@ -1,8 +1,7 @@
 var BASE_URL = window.location.origin;
 
 // birthdays
-
-document.addEventListener("DOMContentLoaded", function () {
+function loadBirthdays() {
 
     let birthdaySwiper = new Swiper(".birthday-swiper", {
         slidesPerView: 2,
@@ -13,40 +12,36 @@ document.addEventListener("DOMContentLoaded", function () {
         },
     });
 
-    loadBirthdays();
+    fetch(BASE_URL + "/satvik/api/get-this-month-birthday")
+        .then(res => res.json())
+        .then(result => {
 
-    function loadBirthdays() {
-        fetch(BASE_URL + "/satvik/api/get-this-month-birthday")
-            .then(res => res.json())
-            .then(result => {
+            console.log(result);
 
-                console.log(result);
+            let wrapper = document.getElementById("birthday-wrapper");
+            if (!wrapper) return;
 
-                let wrapper = document.getElementById("birthday-wrapper");
-                if (!wrapper) return;
+            let html = "";
 
-                let html = "";
+            if (result.data) {
+                result.data.forEach(item => {
+                    const imageUrl = item.image ?? 'https://placehold.co/600x400';
 
-                if (result.data) {
-                    result.data.forEach(item => {
-                        const imageUrl = item.image ?? 'https://placehold.co/600x400';
+                    html += `
+                        <div class="swiper-slide">
+                            <img src="${imageUrl}" class="rounded-3 mb-2">
+                            <h6 class="mb-0 fw-semibold">${item.name ?? ''}</h6>
+                            <small class="text-muted">${item.date_of_birth}</small>
+                        </div>`;
+                });
+            }
 
-                        html += `
-                            <div class="swiper-slide">
-                                <img src="${imageUrl}" class="rounded-3 mb-2">
-                                <h6 class="mb-0 fw-semibold">${item.name ?? ''}</h6>
-                                <small class="text-muted">${item.date_of_birth}</small>
-                            </div>`;
-                    });
-                }
+            wrapper.innerHTML = html;
+            birthdaySwiper.update();
+        })
+        .catch(err => console.error(err));
+}
 
-                wrapper.innerHTML = html;
-                birthdaySwiper.update();
-            })
-            .catch(err => console.error(err));
-    }
-
-});
 // policies
 function loadPolicy() {
     fetch(BASE_URL + "/satvik/api/get-policies")

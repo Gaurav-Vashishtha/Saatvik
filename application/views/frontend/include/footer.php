@@ -254,7 +254,7 @@ document.getElementById("nextMonth").onclick = () => {
 renderCalendar();
 </script>
 
-<script src="http://localhost/satvik/assets/js/api/dashboard.js"></script>
-<script src="http://localhost/satvik/assets/js/main.js"></script>
+<!-- <script src="http://localhost/satvik/assets/js/api/dashboard.js"></script>
+<script src="http://localhost/satvik/assets/js/main.js"></script> -->
   </body>
 </html>

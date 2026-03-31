@@ -9,10 +9,10 @@
         <form method="post">
 
             <div class="mb-3">
-                <label>Name</label>
+                <label>Name*</label>
                 <input type="text" name="name"
                     value="<?= $role->name ?>"
-                    class="form-control">
+                    class="form-control" required>
             </div>
 
             <div class="mb-3">

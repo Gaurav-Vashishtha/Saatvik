@@ -10,6 +10,40 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+    <style>
+        .accordion-button{
+        font-size:14px;
+        }
+
+        .accordion-button:not(.collapsed){
+            background:#f8f9fa;
+            color:#000;
+        }
+
+        .accordion-item{
+            transition:all .2s ease;
+        }
+
+        .accordion-item:hover{
+            transform:translateY(-2px);
+            box-shadow:0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .today-swiper {
+    width: 100%;
+}
+.card {
+    border-radius: 0px;
+    overflow: hidden;
+}
+
+.today-swiper .swiper-slide img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+    </style>
   </head>
   <body>
 

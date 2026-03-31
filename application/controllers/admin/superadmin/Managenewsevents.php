@@ -42,8 +42,6 @@ class manageNewsEvents extends MY_Admin_Controller {
     public function create()
     {
         $this->form_validation->set_rules('title', 'Title', 'required');
-        $this->form_validation->set_rules('description', 'Description', 'required');
-        $this->form_validation->set_rules('event_date', 'Date', 'required');
 
         if ($this->form_validation->run() === FALSE) {
 
@@ -71,7 +69,7 @@ class manageNewsEvents extends MY_Admin_Controller {
             'description'  => $post['description'],
             'event_date'    => $post['event_date'],
             'image'        => $uploaded_image,
-            'is_active'    => isset($post['is_active']) ? 1 : 0,
+            'is_active' => $post['status'],
             'created_at'   => date('Y-m-d H:i:s')
 
         ];
@@ -122,7 +120,7 @@ class manageNewsEvents extends MY_Admin_Controller {
             'description'  => $post['description'],
             'event_date'    => $post['event_date'],
             'image'        => $uploaded_image ?? $news->image,
-            'is_active'    => isset($post['is_active']) ? 1 : 0,
+            'is_active' => $post['is_active'],
             'updated_at'   => date('Y-m-d H:i:s')
 
         ];
