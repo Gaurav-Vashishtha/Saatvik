@@ -146,5 +146,15 @@ public function get_this_month_birthday()
                 return [];
             }
         }
+
+
+
+        public function get_employees()
+        {
+            $this->db->select('*');
+            $this->db->from('employees'); // your employee table
+            $this->db->where('is_active',1);
+            return $this->db->get()->result_array();
+        }
 }
 ?>

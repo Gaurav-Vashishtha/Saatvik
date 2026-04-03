@@ -31,44 +31,51 @@
         }
 
         .today-swiper {
-    width: 100%;
-}
-.card {
-    border-radius: 0px;
-    overflow: hidden;
-}
+        width: 100%;
+         }
+        .card {
+            border-radius: 0px;
+            overflow: hidden;
+        }
 
-.today-swiper .swiper-slide img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
+        .today-swiper .swiper-slide img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        #searchResult{
+            min-height:50px;
+            max-height:350px;
+            overflow-y:auto;
+            overflow-x:hidden;
+        }
     </style>
   </head>
   <body>
 
-<div class="top-header d-flex align-items-center justify-content-between">
+    <div class="top-header d-flex align-items-center justify-content-between">
 
-    <div class="logo">
-        <span>         
-            <img src="assets/images/logo.png">
-       </span>
-    </div>
-
-    <div class="search-box">
-        <i class="bi bi-search"></i>
-        <input type="text" class="form-control" placeholder="Type in to search ..">
-    </div>
-    <!-- Icons -->
-    <div class="header-icons">
-        <div class="icon-badge">
-            <i class="bi bi-envelope"></i>
-            <span>11</span>
+        <div class="logo">
+            <span>         
+                <img src="assets/images/logo.png">
+        </span>
         </div>
-        <div class="icon-badge">
-            <i class="bi bi-bell"></i>
-            <span>7</span>
-        </div>
-    </div>
 
-</div>
+        <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="text" class="form-control" placeholder="Type in to search ..">
+        </div>
+        <!-- Icons -->
+        <div class="header-icons">
+            <div class="icon-badge">
+                <i class="bi bi-envelope"></i>
+                <span>11</span>
+            </div>
+            <div class="icon-badge">
+                <i class="bi bi-bell"></i>
+                <span>7</span>
+            </div>
+        </div>
+
+    </div>

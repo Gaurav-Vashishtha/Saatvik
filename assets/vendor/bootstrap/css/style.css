@@ -515,6 +515,9 @@ p.fw-semibold.small.mb-2.qubox {
     height: 222px;
     object-fit: cover;
 }
+.swiper-wrapper-slide1{
+  height: auto !important;
+}
 .card.border-0.shadow-sm.rounded-4.p-4.mb-4.mt-app {
     margin-top: 38px;
 }

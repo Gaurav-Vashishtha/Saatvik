@@ -171,27 +171,27 @@ $("#submitQuiz").on("click", function () {
 loadQuestion();
 
 </script>
-    <script>
-document.addEventListener("click", function (e) {
-  if (e.target.matches(".leadership-tabs .btn")) {
-    const tabs = e.target.closest(".card");
+<script>
+   document.addEventListener("click", function (e) {
+    if (e.target.matches(".leadership-tabs .btn")) {
+      const tabs = e.target.closest(".card");
 
-    tabs.querySelectorAll(".leadership-tabs .btn").forEach(btn => {
-      btn.classList.remove("active", "btn-dark");
-      btn.classList.add("btn-light");
-    });
+      tabs.querySelectorAll(".leadership-tabs .btn").forEach(btn => {
+        btn.classList.remove("active", "btn-dark");
+        btn.classList.add("btn-light");
+      });
 
-    tabs.querySelectorAll(".tab-content").forEach(content => {
-      content.classList.remove("active");
-    });
+      tabs.querySelectorAll(".tab-content").forEach(content => {
+        content.classList.remove("active");
+      });
 
-    e.target.classList.add("active", "btn-dark");
-    e.target.classList.remove("btn-light");
+      e.target.classList.add("active", "btn-dark");
+      e.target.classList.remove("btn-light");
 
-    const target = e.target.getAttribute("data-tab");
-    tabs.querySelector("#" + target).classList.add("active");
-  }
-});
+      const target = e.target.getAttribute("data-tab");
+      tabs.querySelector("#" + target).classList.add("active");
+    }
+  });
 
 </script>
 <script>
@@ -254,7 +254,83 @@ document.getElementById("nextMonth").onclick = () => {
 renderCalendar();
 </script>
 
-<!-- <script src="http://localhost/satvik/assets/js/api/dashboard.js"></script>
-<script src="http://localhost/satvik/assets/js/main.js"></script> -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const submitButtons = document.querySelectorAll('.submitQuizBtn');
+
+    submitButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const qIndex = btn.getAttribute('data-index');
+            const correctOption = btn.getAttribute('data-correct');
+
+            const selected = document.querySelector(`input[name="answer_${qIndex}"]:checked`);
+            const resultDiv = document.getElementById(`quizResult_${qIndex}`);
+
+            if(!selected) {
+                alert('Please select an option');
+                return;
+            }
+
+            const answer = selected.value;
+
+            if(answer === correctOption) {
+                resultDiv.innerHTML = "✅ Correct!";
+                resultDiv.style.color = "green";
+            } else {
+                resultDiv.innerHTML = `❌ Wrong! Correct answer: ${correctOption}`;
+                resultDiv.style.color = "red";
+            }
+        });
+    });
+});
+</script>
+<!-- Initialize Swiper JS -->
+<script>
+    var newsSwiper = new Swiper(".news-swiper", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        pagination: {
+            el: ".today-news",
+            clickable: true,
+        },
+        breakpoints: {
+            768: {
+                slidesPerView: 2
+            },
+            992: {
+                slidesPerView: 3
+            }
+        }
+    });
+</script>
+
+<script>
+
+function searchEmployee() {
+
+    var input = document.getElementById("employeeSearch").value.toLowerCase();
+    var items = document.getElementsByClassName("employee-item");
+
+    var found = false;
+
+    for (var i = 0; i < items.length; i++) {
+
+        var text = items[i].innerText.toLowerCase();
+
+        if (text.includes(input)) {
+            items[i].style.display = "block";
+            found = true;
+        } else {
+            items[i].style.display = "none";
+        }
+    }
+
+    if(!found){
+        document.getElementById("searchResult").innerHTML = "No matching employee found";
+    }
+
+}
+
+</script>
   </body>
 </html>

@@ -41,6 +41,7 @@ public function index()
     $data['policies']  = $this->Home_model->get_policies();
     $data['news']      = $this->Home_model->get_newevents();
     $data['apps']      = $this->Home_model->get_apps();
+    $data['employees'] = $this->Home_model->get_employees();
     $data['learning']  = $this->Home_model->get_learning_material();
   // Fetch quiz data
         $quiz_raw = $this->Home_model->get_quiz();

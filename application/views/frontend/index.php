@@ -280,51 +280,53 @@
 
 
 
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h6 class="fw-semibold mb-0">Employee Directory</h6>
-                <div class=""></div>
-            </div>
-            <!-- Employee Directory -->
-            <!-- From The Leadership Desk -->
-            <div class="swiper today-searcha">
-                <div class="swiper-wrapper">
+       <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 class="fw-semibold mb-0">Employee Directory</h6>
+        </div>
 
-                    <div class="swiper-slide">
+        <div class="swiper today-searcha">
+            <div class="swiper-wrapper swiper-wrapper-slide1">
 
-                        <div class="card border-0 shadow-sm rounded-4 p-4 ">
+                <div class="swiper-slide">
+                    <div class="card border-0 shadow-sm rounded-4 p-4">
 
+                        <input type="text" id="employeeSearch" class="form-control rounded-pill mb-3" placeholder="Type in to search ..">
 
-                            <input type="text" class="form-control rounded-pill mb-3" placeholder="Type in to search ..">
-
-                            <div class="text-center">
-                                <button class="btn btn-primary btn-sm rounded-pill px-4 mb-3">Search colleagues</button>
-                            </div>
-
-                            <div class="bg-light rounded-3 p-4 text-center text-muted">
-                                Search Result
-                            </div>
+                        <div class="text-center">
+                            <button onclick="searchEmployee()" class="btn btn-primary btn-sm rounded-pill px-4 mb-3">
+                                Search colleagues
+                            </button>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
 
-                        <div class="card border-0 shadow-sm rounded-4 p-4 mt-4">
+                        <div class="bg-light rounded-3 p-4 text-muted" id="searchResult" style="overflow-y:auto;">
+                     
 
+                            <?php if(!empty($employees)): ?>
+                                <?php foreach($employees as $emp): ?>
 
-                            <input type="text" class="form-control rounded-pill mb-3" placeholder="Type in to search ..">
+                                    <div class="employee-item mb-2">
 
-                            <div class="text-center">
-                                <button class="btn btn-primary btn-sm rounded-pill px-4 mb-3">Search colleagues</button>
-                            </div>
+                                        <img src="<?= base_url('uploads/employee/' .$emp['employee_image']) ?>"
+                                         class="rounded-circle me-2"
+                                         width="40" height="40">
+                                       <strong><?= $emp['salutation'] . ' ' . $emp['full_name']; ?></strong><br>
+                                        <small><?= $emp['designation']; ?> | <?= $emp['department']; ?></small>
+                                    </div>
 
-                            <div class="bg-light rounded-3 p-4 text-center text-muted">
-                                Search Result
-                            </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+
+                                <div class="text-center">No Employees Found</div>
+
+                            <?php endif; ?>
+
                         </div>
+
                     </div>
                 </div>
+
             </div>
-
-
+        </div>
 
             <!-- Header -->
             <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
@@ -616,6 +618,8 @@
 
                     <div class="accordion" id="learningAccordion">
 
+                    <?php // print_r($learning); die;?>
+
                         <?php if (!empty($learning)): ?>
 
                             <?php foreach ($learning as $key => $item): ?>
@@ -670,84 +674,53 @@
             </div>
 
             <!-- Quiz of the Week -->
-<div class="col-lg-4">
-    <div class="bg-lightq rounded-3 h-100 ">
-        <button class="btn btn-dark btn-sm w-100 bgbtn mb-3">
-            Quiz of the Week
-        </button>
+    <div class="col-lg-4">
+        <div class="bg-lightq rounded-3 h-100 ">
+            <button class="btn btn-dark btn-sm w-100 bgbtn mb-3">
+                Quiz of the Week
+            </button>
 
-        <?php if(!empty($quiz)): ?>
-            <?php $q_index = 0; ?>
-            <?php foreach($quiz as $q): ?>
-                <div class="quiz-card mb-4" data-index="<?= $q_index ?>">
-                    <!-- Question -->
-                    <p class="fw-semibold small mb-2 qubox"><?= $q['question'] ?></p>
+            <?php if(!empty($quiz)): ?>
+                <?php $q_index = 0; ?>
+                <?php foreach($quiz as $q): ?>
+                    <div class="quiz-card mb-4" data-index="<?= $q_index ?>">
+                        <!-- Question -->
+                        <p class="fw-semibold small mb-2 qubox"><?= $q['question'] ?></p>
 
-                    <div class="asnbox">
-                        <?php foreach($q['options'] as $key => $value): ?>
-                            <?php if(!empty($value)): ?>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="radio"
-                                           name="answer_<?= $q_index ?>"
-                                           id="option_<?= $q_index ?>_<?= $key ?>"
-                                           value="<?= strtoupper($key) ?>">
-                                    <label class="form-check-label" for="option_<?= $q_index ?>_<?= $key ?>">
-                                        <?= $value ?>
-                                    </label>
-                                </div>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                        <div class="asnbox">
+                            <?php foreach($q['options'] as $key => $value): ?>
+                                <?php if(!empty($value)): ?>
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" type="radio"
+                                            name="answer_<?= $q_index ?>"
+                                            id="option_<?= $q_index ?>_<?= $key ?>"
+                                            value="<?= strtoupper($key) ?>">
+                                        <label class="form-check-label" for="option_<?= $q_index ?>_<?= $key ?>">
+                                            <?= $value ?>
+                                        </label>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <div id="quizResult_<?= $q_index ?>" class="mt-2 fw-semibold"></div>
+
+                        <div class="text-center mt-2">
+                            <button class="btn btn-primary btn-sm rounded-pill px-4 submitQuizBtn"
+                                    data-index="<?= $q_index ?>"
+                                    data-correct="<?= strtoupper($q['correct_option']) ?>">
+                                Submit
+                            </button>
+                        </div>
                     </div>
-
-                    <div id="quizResult_<?= $q_index ?>" class="mt-2 fw-semibold"></div>
-
-                    <div class="text-center mt-2">
-                        <button class="btn btn-primary btn-sm rounded-pill px-4 submitQuizBtn"
-                                data-index="<?= $q_index ?>"
-                                data-correct="<?= strtoupper($q['correct_option']) ?>">
-                            Submit
-                        </button>
-                    </div>
-                </div>
-                <?php $q_index++; ?>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p class="text-muted small">No quiz available</p>
-        <?php endif; ?>
+                    <?php $q_index++; ?>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class="text-muted small">No quiz available</p>
+            <?php endif; ?>
+        </div>
     </div>
-</div>
 
-<!-- JS -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const submitButtons = document.querySelectorAll('.submitQuizBtn');
-
-    submitButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const qIndex = btn.getAttribute('data-index');
-            const correctOption = btn.getAttribute('data-correct');
-
-            const selected = document.querySelector(`input[name="answer_${qIndex}"]:checked`);
-            const resultDiv = document.getElementById(`quizResult_${qIndex}`);
-
-            if(!selected) {
-                alert('Please select an option');
-                return;
-            }
-
-            const answer = selected.value;
-
-            if(answer === correctOption) {
-                resultDiv.innerHTML = "✅ Correct!";
-                resultDiv.style.color = "green";
-            } else {
-                resultDiv.innerHTML = `❌ Wrong! Correct answer: ${correctOption}`;
-                resultDiv.style.color = "red";
-            }
-        });
-    });
-});
-</script>
 
         </div>
     </div>
@@ -797,23 +770,4 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<!-- Initialize Swiper JS -->
-<script>
-    var newsSwiper = new Swiper(".news-swiper", {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        pagination: {
-            el: ".today-news",
-            clickable: true,
-        },
-        breakpoints: {
-            768: {
-                slidesPerView: 2
-            },
-            992: {
-                slidesPerView: 3
-            }
-        }
-    });
-</script>
 </div>
