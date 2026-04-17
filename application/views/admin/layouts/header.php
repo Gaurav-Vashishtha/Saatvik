@@ -199,6 +199,24 @@
                 <span>Dashboard</span>
             </a>
         </li>
+        
+                <?php if ($role_id == 1): ?>
+
+                <li>
+                    <a href="<?= site_url('admin/admin-roles'); ?>">
+                        <i class="fas fa-star"></i>
+                        <span>Manage Roles</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="<?= site_url('admin/manage-hr'); ?>">
+                        <i class="fas fa-user"></i>
+                        <span>Manage Admin User</span>
+                    </a>
+                </li>
+
+            <?php endif; ?>
 
             <?php foreach ($sidebars as $menu): ?>
 
@@ -307,29 +325,6 @@
                     });
                 });
             </script>
-
-
-
-
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-
-                    document.addEventListener("change", function(e) {
-
-                        if (e.target.type === "file") {
-
-                            const file = e.target.files[0];
-                            if (!file) return;
-
-                            const maxSize = 2 * 1024 * 1024;
-
-                            if (file.size > maxSize) {
-                                alert("File must be less than 2MB");
-                                e.target.value = "";
-                            }
-                        }
-
-                    });
-
-                });
-            </script>
+            
+            
+            

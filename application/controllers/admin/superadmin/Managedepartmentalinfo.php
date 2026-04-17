@@ -73,9 +73,14 @@ class Managedepartmentalinfo extends MY_Admin_Controller {
         $payload = [
 
             'section'      => $post['section'],
+            'category'       => $post['category'],
             'title'        => $post['title'],
             'description'  => $post['description'],
             'document_link'  => $post['document_link'],
+            'department'     => $post['department'],
+            'version'        => $post['version'],
+            'effective_date' => !empty($post['effective_date']) ? $post['effective_date'] : NULL,
+            'owner'          => $post['owner'],
             'status'       => $post['status'],
             'created_at'   => date('Y-m-d H:i:s')
 
@@ -127,8 +132,13 @@ class Managedepartmentalinfo extends MY_Admin_Controller {
         $payload = [
 
             'title'        => $post['title'],
+            'category'       => $post['category'],
             'description'  => $post['description'],
             'document_link'  => $post['document_link'],
+            'department'     => $post['department'],
+            'version'        => $post['version'],
+            'effective_date' => !empty($post['effective_date']) ? $post['effective_date'] : NULL,
+            'owner'          => $post['owner'],
             'status'       => $post['status'],
             'updated_at'   => date('Y-m-d H:i:s')
 

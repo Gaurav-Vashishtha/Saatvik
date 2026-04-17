@@ -4,9 +4,9 @@
         <h5 class="mb-0">Manage Employee</h5>
 
         <?php if(checkPermission('admin/employee','add')): ?>
-        <a href="<?php echo base_url('admin/employee/create'); ?>" class="btn btn-primary btn-sm">
-            <i class="fa fa-plus"></i> Add Employee
-        </a>
+            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+                <i class="fa fa-plus"></i> Add Employee
+            </button>
         <?php endif; ?>
 
     </div>
@@ -107,3 +107,56 @@
 
     </div>
 </div>
+
+<!-- Add Employee Modal -->
+<div class="modal fade" id="addEmployeeModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Add Employee</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body text-center">
+
+                <a href="<?= base_url('admin/employee/create') ?>" 
+                   class="btn btn-primary w-100 mb-3">
+                    <i class="fa fa-user"></i> Add Single Employee
+                </a>
+
+                <button class="btn btn-success w-100" id="openCsvUpload">
+                    <i class="fa fa-upload"></i> Import via CSV
+                </button>
+
+                <a href="<?= base_url('admin/employee/download_sample_csv') ?>" 
+                    class="btn btn-info w-100 mt-2">
+                    <i class="fa fa-download"></i> Download Sample CSV
+                 </a>
+
+                <form action="<?= base_url('admin/employee/import_csv') ?>" 
+                      method="post" 
+                      enctype="multipart/form-data"
+                      id="csvForm"
+                      style="display:none;"
+                      class="mt-3">
+
+                    <input type="file" name="csv_file" class="form-control mb-2" required>
+
+                    <button type="submit" class="btn btn-success w-100">
+                        Upload CSV
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+document.getElementById('openCsvUpload').addEventListener('click', function () {
+    document.getElementById('csvForm').style.display = 'block';
+});
+</script>

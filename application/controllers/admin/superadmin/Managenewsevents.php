@@ -66,6 +66,7 @@ class manageNewsEvents extends MY_Admin_Controller {
         $payload = [
 
             'title'        => $post['title'],
+            'content_type' => $post['content_type'],
             'description'  => $post['description'],
             'event_date'    => $post['event_date'],
             'image'        => $uploaded_image,
@@ -118,6 +119,7 @@ class manageNewsEvents extends MY_Admin_Controller {
 
             'title'        => $post['title'],
             'description'  => $post['description'],
+            'content_type' => $post['content_type'],
             'event_date'    => $post['event_date'],
             'image'        => $uploaded_image ?? $news->image,
             'is_active' => $post['is_active'],

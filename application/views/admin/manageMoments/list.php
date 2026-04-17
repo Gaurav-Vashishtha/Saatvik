@@ -9,7 +9,13 @@
             </a>
         <?php endif; ?>
     </div>
-
+        <?php
+        $categoryMap = [
+            'event'    => 'Ongoing or Upcoming Events',
+            'award'    => 'Award',
+            'workshop' => 'Workshop / Townhalls / Plant Meeting'
+        ];
+        ?>
     <div class="card-body table-responsive">
 
         <table class="table table-hover datatable">
@@ -18,6 +24,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
+                    <th>Category</th>
                     <th>Image</th>
                     <th>Status</th>
                     <th width="180">Action</th>
@@ -33,6 +40,7 @@
                     <td><?= $i++; ?></td>
 
                     <td><?= $row->title ?></td>
+                    <td><?= $categoryMap[$row->category] ?? ucfirst($row->category); ?></td>
 
                     <td>
                         <?php if(!empty($row->image)): ?>

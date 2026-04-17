@@ -39,10 +39,12 @@ class Managemoments_model extends CI_Model {
     }
 
         public function get_all_active() {
-        return $this->db->where('is_active', 1)
-                        ->order_by('id', 'DESC')
-                        ->get($this->table)
-                        ->result_array();
-    }
+            return $this->db
+                ->where('is_active', 1)
+                ->where('DATE(`date`) <=', date('Y-m-d'), false)
+                ->order_by('id', 'DESC')
+                ->get($this->table)
+                ->result_array();
+        }
 
 }

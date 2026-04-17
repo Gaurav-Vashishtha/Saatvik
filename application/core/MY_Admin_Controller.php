@@ -13,6 +13,11 @@ class MY_Admin_Controller extends MY_Controller  {
 
     private function authMiddleware()
     {
+
+            // if ($this->uri->segment(1) !== 'admin') {
+            //     return; // skip authentication for frontend
+            // }
+
         $uri = $this->uri->uri_string();
 
         $except = [

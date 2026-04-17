@@ -21,108 +21,132 @@ class Home_controller extends CI_Controller {
         $this->load->library(['session','form_validation']);
         $this->load->helper(['url','form','common','text']);
 
-        if (!$this->session->userdata('admin_logged_in')) {
-            redirect('admin');
-        }
     }
 
 
-    // public function index()
-    // {
-    //     $this->load->view('frontend/include/header');
-    //     $this->load->view('frontend/index');
-    //     $this->load->view('frontend/include/footer');
-    // }
-public function index()
-{
+   public function index()
+    {
+    $type  = $this->input->get('type');
+    $month = $this->input->get('month');
 
-    $data['birthdays'] = $this->Home_model->get_this_month_birthday();
-    $data['moments']   = $this->Home_model->get_moments();
-    $data['policies']  = $this->Home_model->get_policies();
-    $data['news']      = $this->Home_model->get_newevents();
-    $data['apps']      = $this->Home_model->get_apps();
-    $data['employees'] = $this->Home_model->get_employees();
-    $data['learning']  = $this->Home_model->get_learning_material();
-  // Fetch quiz data
-        $quiz_raw = $this->Home_model->get_quiz();
+    $month = $month ?? date('m');
 
-        $quiz = [];
+    if (!empty($type)) {
 
-        if (!empty($quiz_raw)) {
-            foreach ($quiz_raw as $item) {
-                $options = [
-                    'a' => $item['option_a'] ?? '',
-                    'b' => $item['option_b'] ?? '',
-                    'c' => $item['option_c'] ?? '',
-                    'd' => $item['option_d'] ?? '',
-                ];
+        switch ($type) {
 
-                $quiz[] = [
-                    'question' => $item['question'],
-                    'options' => $options,
-                    'correct_option' => $item['correct_option'] ?? '', // e.g., 'a', 'b', etc.
-                ];
-            }
+            case 'birthday':
+                $data = $this->Home_model->get_birthdays($month);
+                break;
+
+            case 'anniversary':
+                $data = $this->Home_model->get_anniversaries($month);
+                break;
+
+            case 'joining':
+                $data = $this->Home_model->get_joinings($month);
+                break;
+
+            default:
+                $data = [];
         }
 
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($data));
+    }
+
+    $data['birthdays'] = array_slice($this->Home_model->get_birthdays($month),0,3);
+
+    $data['anniversaries'] = array_slice($this->Home_model->get_anniversaries($month),0,3);
+
+    $data['joinings'] = array_slice($this->Home_model->get_joinings($month),0,3);
+
+        $data['moments']       = $this->Home_model->get_moments();
+        $data['policies']      = $this->Home_model->get_policies();
+        $data['news']          = $this->Home_model->get_newevents();
+        $data['apps']          = $this->Home_model->get_apps();
+        $data['employees']     = $this->Home_model->get_employees();
+        $data['learning']      = $this->Home_model->get_learning_material();
+
+        // Quiz data
+        $quiz_raw = $this->Home_model->get_quiz();
+        $quiz = [];
+        if (!empty($quiz_raw)) {
+            $options = [
+                'a' => $quiz_raw['option_a'] ?? '',
+                'b' => $quiz_raw['option_b'] ?? '',
+                'c' => $quiz_raw['option_c'] ?? '',
+                'd' => $quiz_raw['option_d'] ?? '',
+            ];
+            $quiz[] = [
+                'question'       => $quiz_raw['question'],
+                'options'        => $options,
+                'correct_option' => $quiz_raw['correct_option'] ?? '',
+            ];
+        }
         $data['quiz'] = $quiz;
 
-    // Leader profile
-    $leaders = $this->Home_model->get_leader();
-    $data['leader_profile'] = !empty($leaders) ? $leaders[0] : [];
+        // Leader profile
+        $leaders = $this->Home_model->get_leader();
+        $data['leaders'] = $leaders;
 
-    // Leadership desk posts
-    $desk = $this->Home_model->get_leadership_desk();
+        // Leadership desk
+        $desk = $this->Home_model->get_leadership_desk();
 
-        $data['corp'] = [];
-        $data['notice'] = [];
-        $data['welcome'] = [];
+            $data['corp'] = [];
+            $data['notice'] = [];
+            $data['welcome'] = [];
 
-        foreach ($desk as $row)
-        {
-            if(!isset($row['section'])) continue;
-
-            if($row['section'] == 'corporate')
+            foreach ($desk as $row)
             {
-                $data['corp'][] = $row;
+                if(!isset($row['section'])) continue;
+
+                if($row['section'] == 'corporate')
+                {
+                    $data['corp'][] = $row;
+                }
+                elseif($row['section'] == 'notice')
+                {
+                    $data['notice'][] = $row;
+                }
+                elseif($row['section'] == 'joinee')
+                {
+                    $data['welcome'][] = $row;
+                }
             }
-            elseif($row['section'] == 'notice')
-            {
-                $data['notice'][] = $row;
+
+
+
+            $dept_items = $this->Home_model->get_departmental_information();
+
+            $data['sops'] = [];
+            $data['technical_docs'] = [];
+
+            foreach ($dept_items as $item) {
+                if (!isset($item['section'])) continue;
+
+                if ($item['section'] === 'sops') {
+                    $data['sops'][] = $item;
+                } elseif ($item['section'] === 'technical_document') {
+                    $data['technical_docs'][] = $item;
+                }
             }
-            elseif($row['section'] == 'joinee')
-            {
-                $data['welcome'][] = $row;
-            }
-        }
 
 
-    // ✅ Departmental Information (NEW PART)
 
-    $dept_items = $this->Home_model->get_departmental_information();
+        $data['current_month'] = $month;
+        
+        $year = date('Y');
+        $data['trainings'] = $this->Home_model->get_training_calender($year);
 
-    $data['sops'] = [];
-    $data['technical_docs'] = [];
-
-    foreach ($dept_items as $item)
-    {
-        if(!isset($item['section'])) continue;
-
-        if($item['section'] == 'sops')
-        {
-            $data['sops'][] = $item;
-        }
-        elseif($item['section'] == 'technical_document')
-        {
-            $data['technical_docs'][] = $item;
-        }
+        // Load views
+        $this->load->view('frontend/include/header', $data);
+        $this->load->view('frontend/index', $data);
+        $this->load->view('frontend/include/footer', $data);
     }
 
 
-    $this->load->view('frontend/include/header',$data);
-    $this->load->view('frontend/index',$data);
-    $this->load->view('frontend/include/footer',$data);
-}
 
 
 }

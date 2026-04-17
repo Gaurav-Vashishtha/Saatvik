@@ -24,11 +24,27 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label class="form-label ">Date</label>
-                    <input type="date"
-                            name="date"
-                            class="form-control"
-                            value="<?php echo set_value('date', $moment->date); ?>">
+                    <label class="form-label">Category *</label>
+                    <select name="category" class="form-select" required>
+
+                        <option value="">Select Category</option>
+
+                        <option value="event" 
+                            <?= set_select('category', 'event', ($moment->category == 'event')); ?>>
+                            Ongoing or Upcoming Events
+                        </option>
+
+                        <option value="award" 
+                            <?= set_select('category', 'award', ($moment->category == 'award')); ?>>
+                            Award
+                        </option>
+
+                        <option value="workshop" 
+                            <?= set_select('category', 'workshop', ($moment->category == 'workshop')); ?>>
+                            Workshop / Townhalls / Plant Meeting
+                        </option>
+
+                    </select>
                 </div>
             </div>
             <div class="mb-3">
@@ -38,21 +54,28 @@
                           class="form-control"
                           rows="4"><?= $moment->description ?></textarea>
             </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label ">Image<small>(Max size: 2MB | 600×400 | JPG/PNG/JPEG/WEBP)</small></label>
+                    <input type="file"
+                        name="image"
+                        accept=".jpg,.jpeg,.png,.webp"
+                        class="form-control">
+                    <?php if(!empty($moment->image)): ?>
+                        <div class="mb-2">
+                            <img src="<?= base_url('uploads/moments/'.$moment->image) ?>" width="80">
+                        </div>
+                    <?php endif; ?>
+                </div>
 
-            <div class="mb-3">
-                <label class="form-label ">Image<small>(Max size: 2MB | 600×400 | JPG/PNG/JPEG/WEBP)</small></label>
-
-                <?php if(!empty($moment->image)): ?>
-                    <div class="mb-2">
-                        <img src="<?= base_url('uploads/moments/'.$moment->image) ?>" width="80">
-                    </div>
-                <?php endif; ?>
-
-                <input type="file"
-                       name="image"
-                       class="form-control">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label ">Date</label>
+                    <input type="date"
+                            name="date"
+                            class="form-control"
+                            value="<?php echo set_value('date', $moment->date); ?>">
+                </div>            
             </div>
-
             <div class="mb-3">
                 <label class="form-label ">Status</label>
 
@@ -96,29 +119,94 @@
 <script>
 function createEditor(selector) {
     const $el = $(selector);
+
     if ($el.length && !$el.next('.note-editor').length) {
         $el.summernote({
             height: 200,
+
+            callbacks: {
+                onImageUpload: function(files) {
+                    for (let i = 0; i < files.length; i++) {
+                        uploadImage(files[i], selector);
+                    }
+                }
+            },
+
             toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'italic', 'underline', 'clear']],
-            ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
-            ['fontname', ['fontname']],
-            ['fontsize', ['fontsize']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'hr']],
-            ['view', ['fullscreen', 'codeview']],
-            ['help', ['help']]
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'hr']],
+                ['view', ['fullscreen', 'codeview']],
+                ['help', ['help']]
             ]
         });
     }
+}
+
+// COMMON IMAGE UPLOAD FUNCTION
+function uploadImage(file, editor) {
+    let data = new FormData();
+    data.append("file", file);
+
+    $.ajax({
+        url: "<?= site_url('upload-editor-image') ?>",
+        type: "POST",
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function(res) {
+            let response = JSON.parse(res);
+
+            if (response.status) {
+                $(editor).summernote('insertImage', response.url);
+            } else {
+                alert(response.message);
+            }
+        },
+        
+
+   error: function(xhr, status, error) {
+    console.log("STATUS:", status);
+    console.log("ERROR:", error);
+    console.log("RESPONSE:", xhr.responseText);
+    alert("Check console for error");
+}
+        
+    });
 }
 
 $(document).ready(function () {
     createEditor('#description');
 
 });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        document.addEventListener("change", function(e) {
+
+            if (e.target.type === "file") {
+
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const maxSize = 2 * 1024 * 1024;
+
+                if (file.size > maxSize) {
+                    alert("File must be less than 2MB");
+                    e.target.value = "";
+                }
+            }
+
+        });
+
+    });
 </script>

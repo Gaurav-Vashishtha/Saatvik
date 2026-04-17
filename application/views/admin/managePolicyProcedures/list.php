@@ -18,6 +18,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
+                    <th>Category</th>
                     <th>Status</th>
                     <th width="180">Action</th>
                 </tr>
@@ -32,6 +33,7 @@
                     <td><?= $i++; ?></td>
 
                     <td><?= $p->title; ?></td>
+                    <td><?= ucfirst($p->category_name); ?></td>
 
                     <td>
 

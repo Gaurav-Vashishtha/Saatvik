@@ -23,6 +23,28 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label">Category *</label>
+
+                <select name="category" class="form-control" required>
+
+                    <option value="">Select Category</option>
+
+                    <?php if($item->section == 'sops'): ?>
+                        <option value="guidelines" <?= ($item->category=='guidelines')?'selected':''; ?>>Guidelines</option>
+                        <option value="compliance" <?= ($item->category=='compliance')?'selected':''; ?>>Compliance</option>
+                        <option value="information" <?= ($item->category=='information')?'selected':''; ?>>Information</option>
+                    <?php endif; ?>
+
+                    <?php if($item->section == 'technical_document'): ?>
+                        <option value="tool_badges" <?= ($item->category=='tool_badges')?'selected':''; ?>>Tool & Badges</option>
+                        <option value="programs" <?= ($item->category=='programs')?'selected':''; ?>>Programs</option>
+                        <option value="datasheet" <?= ($item->category=='datasheet')?'selected':''; ?>>Datasheet</option>
+                    <?php endif; ?>
+
+                </select>
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label ">Title *</label>
 
                 <input type="text"
@@ -49,6 +71,43 @@
                        class="form-control"
                        placeholder="https://example.com/policy.pdf"
                        value="<?php echo $item->document_link; ?>">
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Department</label>
+                    <input type="text"
+                        name="department"
+                        class="form-control"
+                        value="<?= $item->department ?>"
+                        >
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Version</label>
+                    <input type="text"
+                        name="version"
+                        class="form-control"
+                        value="<?= $item->version ?>">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Effective Date</label>
+                    <input type="date"
+                        name="effective_date"
+                        class="form-control"
+                        value="<?= !empty($item->effective_date) ? date('Y-m-d', strtotime($item->effective_date)) : '' ?>">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Owner</label>
+                    <input type="text"
+                        name="owner"
+                        class="form-control"
+                        value="<?= $item->owner ?>">
+                </div>
+
             </div>
 
 
@@ -95,25 +154,67 @@
 <script>
 function createEditor(selector) {
     const $el = $(selector);
+
     if ($el.length && !$el.next('.note-editor').length) {
         $el.summernote({
             height: 200,
+
+            callbacks: {
+                onImageUpload: function(files) {
+                    for (let i = 0; i < files.length; i++) {
+                        uploadImage(files[i], selector);
+                    }
+                }
+            },
+
             toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'italic', 'underline', 'clear']],
-            ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
-            ['fontname', ['fontname']],
-            ['fontsize', ['fontsize']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'hr']],
-            ['view', ['fullscreen', 'codeview']],
-            ['help', ['help']]
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'hr']],
+                ['view', ['fullscreen', 'codeview']],
+                ['help', ['help']]
             ]
         });
     }
+}
+
+// COMMON IMAGE UPLOAD FUNCTION
+function uploadImage(file, editor) {
+    let data = new FormData();
+    data.append("file", file);
+
+    $.ajax({
+        url: "<?= site_url('upload-editor-image') ?>",
+        type: "POST",
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function(res) {
+            let response = JSON.parse(res);
+
+            if (response.status) {
+                $(editor).summernote('insertImage', response.url);
+            } else {
+                alert(response.message);
+            }
+        },
+        
+
+   error: function(xhr, status, error) {
+    console.log("STATUS:", status);
+    console.log("ERROR:", error);
+    console.log("RESPONSE:", xhr.responseText);
+    alert("Check console for error");
+}
+        
+    });
 }
 
 $(document).ready(function () {

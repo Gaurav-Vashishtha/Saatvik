@@ -7,23 +7,29 @@ class AuthMiddleware {
     {
         $CI =& get_instance();
 
-        $uri = trim($CI->uri->uri_string(),'/');
+        $uri = trim($CI->uri->uri_string(), '/');
 
         $except = [
             'admin/login',
             'admin/login/authenticate',
-            'admin/logout'
+            'admin/logout',
+
+            '',
+            'home',
+            'home/index',
         ];
+
+        if (strpos($uri, 'admin') !== 0) {
+            return;
+        }
 
         if (in_array($uri, $except)) {
             return;
         }
 
         if (!$CI->session->userdata('admin_logged_in')) {
-
             redirect('admin/login');
             exit;
-
         }
     }
 }

@@ -137,7 +137,7 @@
                     <label class="form-label">
                         Image <small>(Max size: 2MB | 200×200 | JPG/PNG/JPEG/WEBP)</small>
                     </label>
-                    <input type="file" name="image" class="form-control">
+                    <input type="file" name="image" class="form-control" accept=".jpg,.jpeg,.png,.webp">
                 </div>
 
                 <div class="col-md-6 mb-3">
@@ -176,4 +176,28 @@ document.addEventListener("DOMContentLoaded", function() {
     toggleAnniversary();
     maritalStatus.addEventListener("change", toggleAnniversary);
 });
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        document.addEventListener("change", function(e) {
+
+            if (e.target.type === "file") {
+
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const maxSize = 2 * 1024 * 1024;
+
+                if (file.size > maxSize) {
+                    alert("File must be less than 2MB");
+                    e.target.value = "";
+                }
+            }
+
+        });
+
+    });
 </script>

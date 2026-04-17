@@ -36,6 +36,17 @@
 
     </div>
 
+    <?php
+    $categoryMap = [
+        'guidelines'   => 'Guidelines',
+        'compliance'   => 'Compliance',
+        'information'  => 'Information',
+        'tool_badges'  => 'Tool & Badges',
+        'programs'     => 'Programs',
+        'datasheet'    => 'Datasheet'
+    ];
+    ?>
+
 
     <div class="card-body table-responsive">
 
@@ -45,6 +56,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
+                    <th>Category</th>
                     <th>Status</th>
                     <th width="180">Action</th>
                 </tr>
@@ -59,6 +71,7 @@
                         <td><?= $i++; ?></td>
 
                         <td><?= $row->title; ?></td>
+                        <td><?= $categoryMap[$row->category] ?? ucfirst($row->category); ?></td>
 
                         <td>
                             <?php if ($row->status == 1): ?>

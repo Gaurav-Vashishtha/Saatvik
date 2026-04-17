@@ -10,6 +10,15 @@
         <?php endif; ?>
     </div>
 
+    <?php
+        $categoryMap = [
+            'townhall'       => 'Townhalls',
+            'plant_meeting'  => 'Plant Meetings',
+            'csr'            => 'CSR Initiatives',
+            'awards'         => 'Awards / Press Wins'
+        ];
+        ?>
+
     <div class="card-body table-responsive">
 
         <table class="table table-hover datatable">
@@ -18,6 +27,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
+                    <th>Category</th>
                     <th>Date</th>
                     <th>Image</th>
                     <th>Status</th>
@@ -34,6 +44,7 @@
                 <td><?= $i++; ?></td>
 
                 <td><?= $row->title ?></td>
+                <td><?= $categoryMap[$row->content_type] ?? $row->content_type ?></td>
 
                 <td><?= $row->event_date ?></td>
 

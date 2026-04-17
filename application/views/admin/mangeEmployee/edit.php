@@ -19,13 +19,13 @@
                            value="<?= set_value('company_name',$employee->company_name); ?>">
                 </div>
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6" >
                         <label>Employee ID</label>
                         <input type="text" 
                             name="employee_code" 
                             class="form-control" 
                             value="<?= isset($employee->employee_code) ? $employee->employee_code : '' ?>" 
-                            readonly>
+                            >
                     </div>
 
                <div class="col-md-6 mb-3">
@@ -155,7 +155,7 @@
                     <label class="form-label ">
                         Image <small>(Max size: 2MB | 200×200 | JPG/PNG/JPEG/WEBP)</small>
                     </label>
-                    <input type="file" name="employee_image" class="form-control">
+                    <input type="file" name="employee_image" class="form-control" accept=".jpg,.jpeg,.png,.webp">
 
                     <?php if ($employee->employee_image): ?>
                         <img src="<?= base_url('uploads/employee/'.$employee->employee_image); ?>" width="120" class="mt-2">
@@ -194,4 +194,27 @@ document.addEventListener("DOMContentLoaded", function() {
     toggleAnniversary();
     maritalStatus.addEventListener("change", toggleAnniversary);
 });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        document.addEventListener("change", function(e) {
+
+            if (e.target.type === "file") {
+
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const maxSize = 2 * 1024 * 1024;
+
+                if (file.size > maxSize) {
+                    alert("File must be less than 2MB");
+                    e.target.value = "";
+                }
+            }
+
+        });
+
+    });
 </script>

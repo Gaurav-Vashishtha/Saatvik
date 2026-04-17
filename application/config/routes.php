@@ -118,11 +118,11 @@ $route['admin/manage-moments/delete/(:num)'] = 'admin/superadmin/Managemoments/d
 $route['admin/manage-moments/toggle/(:num)'] = 'admin/superadmin/Managemoments/toggle/$1';
 
 
-$route['admin/manage-leadership-desk'] = 'admin/superadmin/Manageleadershipdesk/index';
-$route['admin/manage-leadership-desk/create'] = 'admin/superadmin/Manageleadershipdesk/create';
-$route['admin/manage-leadership-desk/edit/(:num)'] = 'admin/superadmin/Manageleadershipdesk/edit/$1';
-$route['admin/manage-leadership-desk/delete/(:num)'] = 'admin/superadmin/Manageleadershipdesk/delete/$1';
-$route['admin/manage-leadership-desk/toggle/(:num)'] = 'admin/superadmin/Manageleadershipdesk/toggle/$1';
+// $route['admin/manage-leadership-desk'] = 'admin/superadmin/Manageleadershipdesk/index';
+// $route['admin/manage-leadership-desk/create'] = 'admin/superadmin/Manageleadershipdesk/create';
+// $route['admin/manage-leadership-desk/edit/(:num)'] = 'admin/superadmin/Manageleadershipdesk/edit/$1';
+// $route['admin/manage-leadership-desk/delete/(:num)'] = 'admin/superadmin/Manageleadershipdesk/delete/$1';
+// $route['admin/manage-leadership-desk/toggle/(:num)'] = 'admin/superadmin/Manageleadershipdesk/toggle/$1';
 
 $route['admin/manage-apps'] = 'admin/superadmin/Manageapp/index';
 $route['admin/manage-apps/create'] = 'admin/superadmin/Manageapp/create';
@@ -142,10 +142,42 @@ $route['admin/admin-roles/edit/(:num)'] = 'admin/superadmin/Adminroles/edit/$1';
 $route['admin/admin-roles/toggle/(:num)'] = 'admin/superadmin/Adminroles/toggle/$1';
 
 
+$route['upload-editor-image'] = 'common/upload_editor_image';
+
+$route['admin/corporate-communication'] = 'admin/superadmin/Manageleadershipdesk/corporate';
+$route['admin/corporate-communication/create'] = 'admin/superadmin/Manageleadershipdesk/create_corporate';
+$route['admin/corporate-communication/edit/(:num)'] = 'admin/superadmin/Manageleadershipdesk/edit/$1';
+$route['admin/corporate-communication/delete/(:num)'] = 'admin/superadmin/Manageleadershipdesk/delete/$1';
+$route['admin/corporate-communication/toggle/(:num)'] = 'admin/superadmin/Manageleadershipdesk/toggle/$1';
 
 
+$route['admin/notice-circulars'] = 'admin/superadmin/Manageleadershipdesk/notice';
+$route['admin/notice-circulars/create'] = 'admin/superadmin/Manageleadershipdesk/create_notice';
+$route['admin/notice-circulars/edit/(:num)'] = 'admin/superadmin/Manageleadershipdesk/edit/$1';
+$route['admin/notice-circulars/delete/(:num)'] = 'admin/superadmin/Manageleadershipdesk/delete/$1';
+$route['admin/notice-circulars/toggle/(:num)'] = 'admin/superadmin/Manageleadershipdesk/toggle/$1';
 
 
+$route['admin/new-joinee'] = 'admin/superadmin/Manageleadershipdesk/joinee';
+$route['admin/new-joinee/create'] = 'admin/superadmin/Manageleadershipdesk/create_joinee';
+$route['admin/new-joinee/edit/(:num)'] = 'admin/superadmin/Manageleadershipdesk/edit/$1';
+$route['admin/new-joinee/delete/(:num)'] = 'admin/superadmin/Manageleadershipdesk/delete/$1';
+$route['admin/new-joinee/toggle/(:num)'] = 'admin/superadmin/Manageleadershipdesk/toggle/$1';
+
+$route['admin/employee/import_csv'] = 'admin/superadmin/Manageemployee/import_csv';
+$route['admin/employee/download_sample_csv'] = 'admin/superadmin/Manageemployee/download_sample_csv';
+
+// $route['admin/manage-training'] = 'admin/superadmin/ManageTraining/index';
+// $route['admin/manage-training/create'] = 'admin/superadmin/ManageTraining/add';
+// $route['admin/manage-training/edit/(:num)'] = 'admin/superadmin/ManageTraining/edit/$1';
+// $route['admin/manage-training/delete/(:num)'] = 'admin/superadmin/ManageTraining/delete/$1';
+
+
+$route['admin/manage-training'] =              'admin/superadmin/ManageTraining/index';
+$route['admin/manage-training/create'] =       'admin/superadmin/ManageTraining/create';
+$route['admin/manage-training/edit/(:num)'] =   'admin/superadmin/ManageTraining/edit/$1';
+$route['admin/manage-training/delete/(:num)'] = 'admin/superadmin/ManageTraining/delete/$1';
+$route['admin/manage-training/toggle/(:num)'] = 'admin/superadmin/ManageTraining/toggle/$1';
 
 
 

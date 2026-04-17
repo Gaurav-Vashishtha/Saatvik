@@ -44,6 +44,7 @@ class Managemoments extends MY_Admin_Controller {
     public function create()
     {
         $this->form_validation->set_rules('title','Title','required');
+        $this->form_validation->set_rules('category', 'Category', 'required');
 
         if ($this->form_validation->run() === FALSE) {
 
@@ -69,6 +70,7 @@ class Managemoments extends MY_Admin_Controller {
 
             'title' => $post['title'],
             'description' => $post['description'],
+            'category' => $post['category'],
             'date'     => !empty($post['date']) ? $post['date'] : NULL,
             'image' => $uploaded_image,
             'is_active' => $post['status'],
@@ -93,6 +95,7 @@ class Managemoments extends MY_Admin_Controller {
         if(!$moment) show_404();
 
         $this->form_validation->set_rules('title','Title','required');
+        $this->form_validation->set_rules('category', 'Category', 'required');
 
         if ($this->form_validation->run() === FALSE) {
 
@@ -119,6 +122,7 @@ class Managemoments extends MY_Admin_Controller {
 
             'title' => $post['title'],
             'description' => $post['description'],
+            'category' => $post['category'],
             'date'     => !empty($post['date']) ? $post['date'] : NULL,
             'image' => $uploaded_image ?? $moment->image,
             'is_active' => $post['status'],

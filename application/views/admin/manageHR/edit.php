@@ -139,7 +139,7 @@
                     <label class="form-label">
                         Image <small>(Max size: 2MB | 200×200)</small>
                     </label>
-                    <input type="file" name="image" class="form-control">
+                    <input type="file" name="image" class="form-control" accept=".jpg,.jpeg,.png,.webp">
                     <?php if ($hr->image): ?>
                         <img src="<?= base_url('uploads/hr/'.$hr->image); ?>" width="120" class="mt-2">
                     <?php endif; ?>
@@ -185,4 +185,28 @@ document.addEventListener("DOMContentLoaded", function() {
     toggleAnniversary();
     maritalStatus.addEventListener("change", toggleAnniversary);
 });
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        document.addEventListener("change", function(e) {
+
+            if (e.target.type === "file") {
+
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const maxSize = 2 * 1024 * 1024;
+
+                if (file.size > maxSize) {
+                    alert("File must be less than 2MB");
+                    e.target.value = "";
+                }
+            }
+
+        });
+
+    });
 </script>

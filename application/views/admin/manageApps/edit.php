@@ -46,7 +46,7 @@
                             Image <small>(Max size: 2MB | 200×200 | JPG/PNG/JPEG/WEBP)</small>
                         </label>
 
-                        <input type="file" name="image" class="form-control">
+                        <input type="file" name="image" class="form-control" accept=".jpg,.jpeg,.png,.webp">
 
                         <?php if(!empty($app->image)) { ?>
                             <img src="<?= base_url('uploads/apps/'.$app->image); ?>"
@@ -91,3 +91,26 @@
     </div>
 
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        document.addEventListener("change", function(e) {
+
+            if (e.target.type === "file") {
+
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const maxSize = 2 * 1024 * 1024;
+
+                if (file.size > maxSize) {
+                    alert("File must be less than 2MB");
+                    e.target.value = "";
+                }
+            }
+
+        });
+
+    });
+</script>

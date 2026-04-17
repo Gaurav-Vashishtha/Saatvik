@@ -43,10 +43,11 @@ class Quiz_model extends CI_Model {
             return $this->update($id, ['is_active' => $new_status]);
         }
 
-             public function get_all_active() {
-             return $this->db->where('is_active', 1)
+    public function get_last_active() {
+        return $this->db->where('is_active', 1)
                         ->order_by('id', 'DESC')
+                        ->limit(1)
                         ->get($this->table)
-                        ->result_array();
+                        ->row_array();
     }
 }

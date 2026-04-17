@@ -37,10 +37,12 @@ class Managenewsevents_model extends CI_Model {
         return $this->update($id,['is_active'=>$new_status]);
     }
 
-     public function get_all_active() {
-        return $this->db->where('is_active', 1)
-                        ->order_by('id', 'DESC')
-                        ->get($this->table)
-                        ->result_array();
-    }
+        public function get_all_active() {
+            return $this->db
+                ->where('is_active', 1)
+                ->where('event_date <=', date('Y-m-d')) // key condition
+                ->order_by('id', 'DESC')
+                ->get($this->table)
+                ->result_array();
+        }
 }

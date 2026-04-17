@@ -48,6 +48,7 @@
 
                     <input type="file"
                            name="image"
+                           accept=".jpg,.jpeg,.png,.webp"
                            class="form-control">
                 </div>
 
@@ -84,3 +85,26 @@
 
 
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        document.addEventListener("change", function(e) {
+
+            if (e.target.type === "file") {
+
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const maxSize = 2 * 1024 * 1024;
+
+                if (file.size > maxSize) {
+                    alert("File must be less than 2MB");
+                    e.target.value = "";
+                }
+            }
+
+        });
+
+    });
+</script>

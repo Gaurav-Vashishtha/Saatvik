@@ -16,50 +16,54 @@ class Home_model extends CI_Model {
         $this->load->model('admin/Manageleadershipdesk_model');
     }
 
-public function get_this_month_birthday()
-{
-    $currentMonth = date('m');
-    $currentDay   = date('d');
+// public function get_this_month_birthday()
+// {
+//     $currentMonth = date('m');
+//     $currentDay   = date('d');
 
-    $this->db->select('CONCAT(salutation, " ", full_name) as name, date_of_birth, image');
-    $this->db->where('is_active', 1);
-    $this->db->where('MONTH(date_of_birth)', $currentMonth);
-    $this->db->where('DAY(date_of_birth) >=', $currentDay);
+//     $this->db->select('CONCAT(salutation, " ", full_name) as name, date_of_birth, image');
+//     $this->db->where('is_active', 1);
+//     $this->db->where('MONTH(date_of_birth)', $currentMonth);
+//     $this->db->where('DAY(date_of_birth) >=', $currentDay);
 
-    $users = $this->db->get('users')->result_array();
+//     $users = $this->db->get('users')->result_array();
 
-    foreach ($users as &$user) {
-        $user['image'] = !empty($user['image'])
-            ? base_url('uploads/hr/' . $user['image'])
-            : base_url('uploads/default.png');
-    }
+//     foreach ($users as &$user) {
+//         $user['image'] = !empty($user['image'])
+//             ? base_url('uploads/hr/' . $user['image'])
+//             : base_url('uploads/default.png');
+//     }
 
-    $this->db->select('CONCAT(salutation, " ", full_name) as name, date_of_birth, employee_image as image');
-    $this->db->where('is_active', 1);
-    $this->db->where('MONTH(date_of_birth)', $currentMonth);
-    $this->db->where('DAY(date_of_birth) >=', $currentDay);
+//     $this->db->select('CONCAT(salutation, " ", full_name) as name, date_of_birth, employee_image as image');
+//     $this->db->where('is_active', 1);
+//     $this->db->where('MONTH(date_of_birth)', $currentMonth);
+//     $this->db->where('DAY(date_of_birth) >=', $currentDay);
 
-    $employees = $this->db->get('employees')->result_array();
+//     $employees = $this->db->get('employees')->result_array();
 
-    foreach ($employees as &$emp) {
-        $emp['image'] = !empty($emp['image'])
-            ? base_url('uploads/employee/' . $emp['image'])
-            : base_url('uploads/default.png');
-    }
+//     foreach ($employees as &$emp) {
+//         $emp['image'] = !empty($emp['image'])
+//             ? base_url('uploads/employee/' . $emp['image'])
+//             : base_url('uploads/default.png');
+//     }
 
-    $birthdays = array_merge($users, $employees);
+//     $birthdays = array_merge($users, $employees);
 
-    usort($birthdays, function ($a, $b) {
-        return date('d', strtotime($a['date_of_birth'])) - date('d', strtotime($b['date_of_birth']));
-    });
+//     usort($birthdays, function ($a, $b) {
+//         return date('d', strtotime($a['date_of_birth'])) - date('d', strtotime($b['date_of_birth']));
+//     });
 
-    return $birthdays;
-}
+//     return $birthdays;
+// }
 
-    public function get_moments()
-    {
-        return $this->db->get('moments')->result();
-    }
+            public function get_moments() {
+                return $this->db
+                    ->where('is_active', 1)
+                    ->where('date <=', date('Y-m-d'))
+                    ->order_by('id', 'DESC')
+                    ->get('moments')
+                    ->result();
+            }
 
         public function get_policies()
         {
@@ -89,7 +93,7 @@ public function get_this_month_birthday()
 
         public function get_quiz()
         {
-            return $this->Quiz_model->get_all_active();
+            return $this->Quiz_model->get_last_active();
         }
 
         public function get_departmental_information()
@@ -156,5 +160,172 @@ public function get_this_month_birthday()
             $this->db->where('is_active',1);
             return $this->db->get()->result_array();
         }
+
+
+        // public function get_birthdays()
+        // {
+        //     $this->db->select('full_name, employee_image, date_of_birth');
+        //     $this->db->from('employees');
+        //     $this->db->where('is_active',1);
+        //     $this->db->where('MONTH(date_of_birth)', date('m'));
+
+        //     $query = $this->db->get()->result_array();
+
+        //     $data = [];
+
+        //     foreach($query as $row)
+        //     {
+        //        $data[] = [
+        //             'name'  => $row['full_name'],
+        //             'image' => !empty($row['employee_image'])
+        //                 ? base_url('uploads/employees/'.$row['employee_image'])
+        //                 : base_url('assets/images/default-user.png'),
+        //             'date'  => $row['date_of_birth'] ?? null
+        //         ];
+        //     }
+
+        //     return $data;
+        // }
+
+
+        // public function get_anniversaries()
+        // {
+        //     $this->db->select('full_name, employee_image, anniversary_date');
+        //     $this->db->from('employees');
+        //     $this->db->where('is_active',1);
+        //     $this->db->where('marital_status','Married');
+        //     $this->db->where('MONTH(anniversary_date)', date('m'));
+
+        //     $query = $this->db->get()->result_array();
+
+        //     $data = [];
+
+        //     foreach($query as $row)
+        //     {
+        //       $data[] = [
+        //             'name'  => $row['full_name'],
+        //             'image' => !empty($row['employee_image'])
+        //                 ? base_url('uploads/employees/'.$row['employee_image'])
+        //                 : base_url('assets/images/default-user.png'),
+        //             'date'  => $row['anniversary_date'] ?? null
+        //         ];
+        //     }
+
+        //     return $data;
+        // }
+
+
+        // public function get_joinings()
+        // {
+        //     $this->db->select('full_name, employee_image, date_of_joining');
+        //     $this->db->from('employees');
+        //     $this->db->where('is_active',1);
+        //     $this->db->where('MONTH(date_of_joining)', date('m'));
+
+        //     $query = $this->db->get()->result_array();
+
+        //     $data = [];
+
+        //     foreach($query as $row)
+        //     {
+        //         $data[] = [
+        //             'name'  => $row['full_name'],
+        //             'image' => !empty($row['employee_image'])
+        //                 ? base_url('uploads/employees/'.$row['employee_image'])
+        //                 : base_url('assets/images/default-user.png'),
+        //             'date'  => $row['date_of_joining'] ?? null
+        //         ];
+        //     }
+
+        //     return $data;
+        // }
+
+      private function format_employee_data($query, $date_field)
+        {
+            $data = [];
+            foreach ($query as $row) {
+                $data[] = [
+                    'name'  => $row['full_name'],
+                    'image' => !empty($row['employee_image'])
+                        ? base_url('uploads/employee/'.$row['employee_image'])
+                        : base_url('assets/images/default-user.png'),
+                    'date'  => $row[$date_field] ?? null
+                ];
+            }
+            return $data;
+        }
+
+            public function get_birthdays($month = null)
+            {
+                $month = (int) ($month ?? date('m'));
+                $today = date('m-d');
+                $current_month = (int) date('m');
+
+                $this->db->select('full_name, employee_image, date_of_birth');
+                $this->db->from('employees');
+                $this->db->where('is_active', 1);
+                $this->db->where('MONTH(date_of_birth)', $month);
+
+                // Only filter by day if it's the current month
+                if ($month === $current_month) {
+                    $this->db->where('DATE_FORMAT(date_of_birth, "%m-%d") >=', $today);
+                }
+
+                $this->db->order_by('DATE_FORMAT(date_of_birth, "%m-%d")', 'ASC', FALSE);
+
+                $query = $this->db->get()->result_array();
+
+                return $this->format_employee_data($query, 'date_of_birth');
+            }
+    
+            public function get_anniversaries($month = null)
+            {
+                $month = (int) ($month ?? date('m'));
+                $today = date('m-d');
+                $current_month = (int) date('m');
+
+                $this->db->select('full_name, employee_image, anniversary_date');
+                $this->db->from('employees');
+                $this->db->where('is_active', 1);
+                $this->db->where('marital_status', 'Married');
+                $this->db->where('MONTH(anniversary_date)', $month);
+
+                // Only filter by day if it's the current month
+                if ($month === $current_month) {
+                    $this->db->where('DATE_FORMAT(anniversary_date, "%m-%d") >=', $today);
+                }
+
+                $this->db->order_by('DATE_FORMAT(anniversary_date, "%m-%d")', 'ASC', FALSE);
+
+                $query = $this->db->get()->result_array();
+
+                return $this->format_employee_data($query, 'anniversary_date');
+            }
+
+    public function get_joinings($month = null)
+    {
+        $month = $month ?? date('m');
+        $year  = date('Y'); // only current year
+
+        $this->db->select('full_name, employee_image, date_of_joining');
+        $this->db->from('employees');
+        $this->db->where('is_active', 1);
+        $this->db->where('MONTH(date_of_joining)', $month);
+        $this->db->where('YEAR(date_of_joining)', $year);
+
+        $query = $this->db->get()->result_array();
+
+        return $this->format_employee_data($query, 'date_of_joining');
+    }
+    
+    
+    public function get_training_calender($year)
+    {
+     return $this->db
+    ->where('YEAR(training_date)', $year)
+    ->where('is_active', 1)
+    ->get('training_calendar')
+    ->result();
+    }
 }
 ?>
